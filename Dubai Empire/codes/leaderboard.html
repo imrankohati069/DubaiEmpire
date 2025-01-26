@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #ffd700;
+            margin: 20px 0;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 10px;
+        }
+
+        .leaderboard-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .user-card {
+            margin: 10px auto;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            color: #fff;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-image img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            margin-right: 15px;
+        }
+
+        .user-info h4 {
+            font-size: 20px;
+            color: #080808;
+            margin: 0;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .user-points {
+            font-size: 18px;
+            color: #0e0d0d;
+            font-weight: bold;
+        }
+
+        .first-place {
+            background: linear-gradient(45deg, #ffb300, #ffcc00);
+        }
+
+        .second-place {
+            background: linear-gradient(45deg, #ff7f00, #ffcc00);
+        }
+
+        .third-place {
+            background: linear-gradient(45deg, #ff4c00, #ffcc00);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid #444;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-nav .nav-item {
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav .nav-item:hover {
+            color: #ffcc00;
+        }
+
+        @media (max-width: 600px) {
+            .leaderboard-container {
+                max-width: 100%;
+            }
+
+            .user-card {
+                padding: 10px;
+            }
+
+            .user-info h4 {
+                font-size: 18px;
+            }
+
+            .user-points {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2><i class="fas fa-trophy"></i> LEADERBOARD</h2>
+
+    <!-- Leaderboard Section -->
+    <div class="leaderboard-container" id="leaderboard-container">
+        <!-- Dynamic User Cards will be inserted here -->
+    </div>
+
+    <!-- Footer Navigation (Menu) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="airdrop.html" class="nav-item">
+            <i class="fas fa-gift"></i>
+            <span>AIRDROP</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <script>
+        // Sample data - Ideally, you should fetch this data from a backend or localStorage
+        // Assuming user data is stored in localStorage as "users" array
+        const users = JSON.parse(localStorage.getItem("users")) || [
+            { name: "John Doe", balance: 500, img: "images/user1.png" },
+            { name: "Jane Smith", balance: 450, img: "images/user2.png" },
+            { name: "Chris Brown", balance: 400, img: "images/user3.png" },
+            { name: "Sara Lee", balance: 350, img: "images/user4.png" },
+            { name: "Mark Z", balance: 300, img: "images/user5.png" }
+        ];
+
+        function updateLeaderboard() {
+            const leaderboardContainer = document.getElementById("leaderboard-container");
+            leaderboardContainer.innerHTML = ""; // Clear previous leaderboard
+
+            // Sort users based on balance in descending order
+            users.sort((a, b) => b.balance - a.balance);
+
+            // Generate user cards for leaderboard
+            users.forEach((user, index) => {
+                const userCard = document.createElement("div");
+                userCard.classList.add("user-card");
+
+                // Add rank class based on index (1st, 2nd, 3rd)
+                if (index === 0) userCard.classList.add("first-place");
+                else if (index === 1) userCard.classList.add("second-place");
+                else if (index === 2) userCard.classList.add("third-place");
+
+                // Add content to user card
+                userCard.innerHTML = `
+                    <div class="user-details">
+                        <div class="user-image">
+                            <img src="${user.img}" alt="${user.name}">
+                        </div>
+                        <div class="user-info">
+                            <h4>${index + 1}th</h4>
+                            <p>${user.name}</p>
+                        </div>
+                    </div>
+                    <div class="user-points">${user.balance} Coins</div>
+                `;
+
+                // Append user card to the leaderboard container
+                leaderboardContainer.appendChild(userCard);
+            });
+        }
+
+        // Call the function to update leaderboard when the page loads
+        document.addEventListener("DOMContentLoaded", updateLeaderboard);
+    </script>
+</body>
+</html>
