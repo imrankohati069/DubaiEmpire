@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            text-align: center;
+        }
+
+        .header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid #ffcc00;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .share-button {
+            background: #ffcc00;
+            color: #1a1a1a;
+        }
+
+        .share-button:hover {
+            background: #ffb300;
+        }
+
+        .claim-button {
+            background: #4caf50;
+            color: #fff;
+            display: none;
+        }
+
+        .claim-button:hover {
+            background: #45a049;
+        }
+
+        .reward-logo {
+            width: 30px;
+            height: 30px;
+            background-image: url('https://via.placeholder.com/30');
+            background-size: cover;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .reward-text {
+            font-size: 16px;
+            color: #ffcc00;
+            margin-top: 5px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            border-top: 2px solid #ffcc00;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-item:hover {
+            color: #ffcc00;
+        }
+
+        .section-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .section-buttons button {
+            margin: 0 10px;
+        }
+
+        .reward-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <!-- Header Content (Logo, etc.) -->
+    </div>
+
+    <!-- Invite Friends Sections -->
+    <div class="section">
+        <div class="section-buttons">
+            <h3>Invite 3 Friends</h3>
+            <button class="button share-button" id="start-3" onclick="inviteFriends(3)">Invite</button>
+        </div>
+        <div class="reward-section">
+            <div class="reward-text">100 Coins</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-buttons">
+            <h3>Invite 5 Friends</h3>
+            <button class="button share-button" id="start-5" onclick="inviteFriends(5)">Invite</button>
+        </div>
+        <div class="reward-section">
+            <div class=""></div>
+            <div class="reward-text">500 Coins</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-buttons">
+            <h3>Invite 10 Friends</h3>
+            <button class="button share-button" id="start-10" onclick="inviteFriends(10)">Invite</button>
+        </div>
+        <div class="reward-section">
+            <div class="reward-logo"></div>
+            <div class="reward-text">1000 Coins</div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="airdrop.html" class="nav-item">
+            <i class="fas fa-gift"></i>
+            <span>AIRDROP</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <script>
+        function inviteFriends(friendsCount) {
+            const link = "https://t.me/D Empireclon_bot"; // Link to share
+            const startButton = document.getElementById('start-' + friendsCount);
+            // Check if the Share API is supported
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join my game!',
+                    text: `I am inviting you to join the game and earn rewards. Here's the link:`,
+                    url: link,
+                }).then(() => {
+                    console.log('Successfully shared');
+                    startButton.style.display = 'none'; // Hide the invite button after sharing
+                }).catch((error) => {
+                    console.error('Error sharing', error);
+                });
+            } else {
+                alert("Sharing is not supported on this device.");
+            }
+        }
+    </script>
+
+</body>
+</html>

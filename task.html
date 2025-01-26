@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Tasks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .task-container {
+            margin: 10px auto;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .task {
+            margin: 10px auto;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border: 1px solid #444;
+            border-radius: 12px;
+            background-color: #333030;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            width: 80%;
+        }
+
+        .task:hover {
+            transform: translateY(-5px);
+        }
+
+        .task-detail {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .task h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #ffd700;
+        }
+
+        .task-data {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .task-data img {
+            margin-right: 5px;
+        }
+
+        .task-data h5 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 16px;
+        }
+
+        .task-button {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-button:hover {
+            background-color: #ffb300;
+        }
+
+        .task-button.claim {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .task-button.claim:hover {
+            background-color: #45a049;
+        }
+
+        .task-button.disabled {
+            background-color: #e74c3c;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .task-button.complete {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .task-button.complete:hover {
+            background-color: #2980b9;
+        }
+
+        .task-button.ads {
+            background-color: #8e44ad;
+            color: white;
+        }
+
+        .task-button.ads:hover {
+            background-color: #7d3c8c;
+        }
+
+        @media (max-width: 600px) {
+            .task-container {
+                max-width: 100%;
+            }
+
+            .task-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
+            }
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="tasks scrollable">
+        <!-- Daily Ad Task -->
+        <div class="task-container" id="taskAdsContainer">
+            <div class="task">
+                <div class="task-detail">
+                    <h4>Watch Daily Ads</h4>
+                    <div class="task-data">
+                        <img src="material/images/coin-logo.png" width="20px" alt="Coin Icon" />
+                        <h5> 50 Coins</h5>
+                    </div>
+                </div>
+                <button class="task-button ads" id="taskAds" onclick="watchAd()">Watch Ad</button>
+                <button class="task-button claim" id="claimAds" style="display: none;" onclick="claimTask('ads', 20)">Claim</button>
+                <button class="task-button complete" id="completeAds" style="display: none;" disabled>Complete</button>
+            </div>
+        </div>
+
+        <!-- Telegram Channel Task -->
+        <div class="task-container" id="taskTelegramContainer">
+            <div class="task">
+                <div class="task-detail">
+                    <h4>Subscribe our Telegram</h4>
+                    <div class="task-data">
+                        <img src="material/images/tele.png" width="20px" alt="Coin Icon" />
+                        <h5> 50 Coins</h5>
+                    </div>
+                </div>
+                <button class="task-button" id="taskTelegram" onclick="startTask('telegram')">Join Now</button>
+                <button class="task-button claim" id="claimTelegram" style="display: none;" onclick="claimTask('telegram', 50)">Claim</button>
+                <button class="task-button complete" id="completeTelegram" style="display: none;" disabled>Complete</button>
+            </div>
+        </div>
+
+        <!-- YouTube Channel Task -->
+        <div class="task-container" id="taskYoutubeContainer">
+            <div class="task">
+                <div class="task-detail">
+                    <h4>Subscribe our YouTube Channel</h4>
+                    <div class="task-data">
+                        <img src="material/images/you.gif" width="20px" alt="Coin Icon" />
+                        <h5> 50 Coins</h5>
+                    </div>
+                </div>
+                <button class="task-button" id="taskYoutube" onclick="startTask('youtube')">Join Now</button>
+                <button class="task-button claim" id="claimYoutube" style="display: none;" onclick="claimTask('youtube', 50)">Claim</button>
+                <button class="task-button complete" id="completeYoutube" style="display: none;" disabled>Complete</button>
+            </div>
+        </div>
+ <!-- YouTube Channel Task -->
+ <div class="task-container" id="taskYoutubeContainer2">
+    <div class="task">
+        <div class="task-detail">
+            <h4>Subscribe our YouTube Channel</h4>
+            <div class="task-data">
+                <img src="material/images/you.gif" width="20px" alt="Coin Icon" />
+                <h5> 50 Coins</h5>
+            </div>
+        </div>
+        <button class="task-button" id="taskYoutube2" onclick="startTask('youtube2')">Join Now</button>
+        <button class="task-button claim" id="claimYoutube" style="display: none;" onclick="claimTask('youtube', 50)">Claim</button>
+        <button class="task-button complete" id="completeYoutube" style="display: none;" disabled>Complete</button>
+    </div>
+</div>
+        <!-- Facebook Channel Task -->
+        <div class="task-container" id="taskFacebookContainer">
+            <div class="task">
+                <div class="task-detail">
+                    <h4>Follow our Facebook Channel</h4>
+                    <div class="task-data">
+                        <img src="material/images/fa.png" width="20px" alt="Coin Icon" />
+                        <h5> 50 Coins</h5>
+                    </div>
+                </div>
+                <button class="task-button" id="taskFacebook" onclick="startTask('facebook')">Join Now</button>
+                <button class="task-button claim" id="claimFacebook" style="display: none;" onclick="claimTask('facebook', 50)">Claim</button>
+                <button class="task-button complete" id="completeFacebook" style="display: none;" disabled>Complete</button>
+            </div>
+        </div>
+
+        <!-- Instagram Channel Task -->
+        <div class="task-container" id="taskInstagramContainer">
+            <div class="task">
+                <div class="task-detail">
+                    <h4>Follow our Instagram Channel</h4>
+                    <div class="task-data">
+                        <img src="material/images/ista.png" width="20px" alt="Coin Icon" />
+                        <h5> 50 Coins</h5>
+                    </div>
+                </div>
+                <button class="task-button" id="taskInstagram" onclick="startTask('instagram')">Join Now</button>
+                <button class="task-button claim" id="claimInstagram" style="display: none;" onclick="claimTask('instagram', 50)">Claim</button>
+                <button class="task-button complete" id="completeInstagram" style="display: none;" disabled>Complete</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="airdrop.html" class="nav-item">
+            <i class="fas fa-gift"></i>
+            <span>AIRDROP</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if tasks are completed
+            checkTaskCompletion('ads');
+            checkTaskCompletion('telegram');
+            checkTaskCompletion('youtube');
+            checkTaskCompletion('facebook');
+            checkTaskCompletion('instagram');
+        });
+
+        function checkTaskCompletion(task) {
+            const taskStatus = localStorage.getItem(`task_${task}_completed`);
+            if (taskStatus === 'true') {
+                document.getElementById(`task${capitalize(task)}Container`).style.display = 'none';
+            }
+        }
+
+        function startTask(platform) {
+            let url = '';
+            switch (platform) {
+                case 'telegram':
+                    url = 'https://telegram.org/';
+                    break;
+                case 'youtube':
+                    url = 'https://www.youtube.com/@Dubai_Empire/';
+                    break;
+                    case 'youtube2':
+                    url = 'https://youtube.com/@raastaauryaadein?si=h2jRwToIMqdxhXjn/';
+                    break;  
+                case 'facebook':
+                    url = 'https://www.facebook.com/share/19ysjzY9XQ//';
+                    break;
+                case 'instagram':
+                    url = 'https://https://www.instagram.com/raastaauryaadein?utm_source=qr&igsh=MXhwMmN5OTBwb2pkZQ==/';
+                    break;
+            }
+
+            // Open the respective platform's URL in a new tab
+            window.open(url, '_blank');
+
+            // Hide "Join Now" button and show "Claim" button
+            document.getElementById(`task${capitalize(platform)}`).style.display = 'none';
+            document.getElementById(`claim${capitalize(platform)}`).style.display = 'inline-block';
+        }
+
+        function watchAd() {
+            // Simulate watching an ad by just waiting a few seconds
+            alert("Watching Ad...");
+
+            // After ad is watched, show "Claim" button
+            document.getElementById('taskAds').style.display = 'none';
+            document.getElementById('claimAds').style.display = 'inline-block';
+        }
+
+        function claimTask(platform, reward) {
+            const balance = parseInt(localStorage.getItem('coins') || '0') + reward;
+            localStorage.setItem('coins', balance);
+            localStorage.setItem(`task_${platform}_completed`, 'true'); // Mark task as completed
+            alert('Reward claimed successfully!');
+
+            // Hide Claim button, show Complete button and disable the task
+            document.getElementById(`claim${capitalize(platform)}`).style.display = 'none';
+            document.getElementById(`complete${capitalize(platform)}`).style.display = 'inline-block';
+            document.getElementById(`complete${capitalize(platform)}`).disabled = false;
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+</body>
+</html>

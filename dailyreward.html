@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Your styles here */
+        .reward-card-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .reward-card {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 12px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .reward-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .reward-card p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .reward-card button {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .reward-card button:hover {
+            background-color: #ffb300;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div class="icon-container">
+            <img src="images/your-logo.png" alt="User Logo">
+            <span class="icon-text" id="username">Username</span>
+        </div>   
+    </div>
+
+    <!-- Logo and Points Section -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="Coin Logo">
+        <div id="balance">0 Coins</div>
+    </div>
+
+    <!-- Daily Reward Button -->
+    <button class="daily-reward-button" id="claimButton" onclick="handleClaim()">Start</button>
+
+    <!-- Daily Reward Modal -->
+    <div id="rewardModal" class="reward-modal">
+        <div class="reward-content">
+            <span class="close-btn" onclick="closeRewardModal()">&times;</span>
+            <h2>Claim Your Daily Reward</h2>
+            <!-- Reward Cards -->
+            <div class="reward-card-container">
+                <!-- Day 1 -->
+                <div class="reward-card">
+                    <h3>Day 1</h3>
+                    <p>100 Coins</p>
+                    <button id="day1Button" onclick="claimReward(100, 'day1')">Start</button>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="reward-card">
+                    <h3>Day 2</h3>
+                    <p>200 Coins</p>
+                    <button id="day2Button" onclick="claimReward(200, 'day2')">Start</button>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="reward-card">
+                    <h3>Day 3</h3>
+                    <p>300 Coins</p>
+                    <button id="day3Button" onclick="claimReward(300, 'day3')">Start</button>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="reward-card">
+                    <h3>Day 4</h3>
+                    <p>400 Coins</p>
+                    <button id="day4Button" onclick="claimReward(400, 'day4')">Start</button>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="reward-card">
+                    <h3>Day 5</h3>
+                    <p>500 Coins</p>
+                    <button id="day5Button" onclick="claimReward(500, 'day5')">Start</button>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="reward-card">
+                    <h3>Day 6</h3>
+                    <p>600 Coins</p>
+                    <button id="day6Button" onclick="claimReward(600, 'day6')">Start</button>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="reward-card">
+                    <h3>Day 7</h3>
+                    <p>700 Coins</p>
+                    <button id="day7Button" onclick="claimReward(700, 'day7')">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let userId = localStorage.getItem("userId") || "Guest";
+        document.getElementById("username").innerText = userId;
+
+        let balance = parseInt(localStorage.getItem("coins")) || 0;
+        document.getElementById("balance").innerText = balance + " Coins";
+
+        // Function to handle claim logic
+        function handleClaim() {
+            let lastClaimTime = localStorage.getItem("lastClaimTime");
+            let currentTime = new Date().getTime();
+
+            if (!lastClaimTime || currentTime - lastClaimTime >= 24 * 60 * 60 * 1000) {
+                // Enable claim
+                document.getElementById("claimButton").innerText = "Claim";
+                localStorage.setItem("lastClaimTime", currentTime);
+            } else {
+                let remainingTime = 24 * 60 * 60 * 1000 - (currentTime - lastClaimTime);
+                let hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                alert(`Please wait ${hours} hours and ${minutes} minutes for the next claim.`);
+            }
+        }
+
+        function claimReward(amount, day) {
+            let button = document.getElementById(day + 'Button');
+            button.innerText = 'Claimed';  // Change button text after claim
+            button.disabled = true;  // Disable the button after claiming
+            balance += amount;
+            localStorage.setItem("coins", balance);  // Save the updated balance
+            document.getElementById("balance").innerText = balance + " Coins";  // Update balance
+            alert("You have claimed your " + amount + " coins!");
+        }
+
+        // If claimed, disable the button for 24 hours
+        window.onload = function() {
+            let lastClaimTime = localStorage.getItem("lastClaimTime");
+            let currentTime = new Date().getTime();
+            if (lastClaimTime) {
+                if (currentTime - lastClaimTime >= 24 * 60 * 60 * 1000) {
+                    document.getElementById("claimButton").innerText = "Start";
+                } else {
+                    let remainingTime = 24 * 60 * 60 * 1000 - (currentTime - lastClaimTime);
+                    let hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                    let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById("claimButton").innerText = `Next claim in ${hours}h ${minutes}m`;
+                    document.getElementById("claimButton").disabled = true;
+                }
+            } else {
+                document.getElementById("claimButton").innerText = "Start";
+            }
+        }
+    </script>
+
+</body>
+</html>
