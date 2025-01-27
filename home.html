@@ -178,6 +178,12 @@
             color: #ffb300;
         }
 
+        .daily-reward-text {
+            font-size: 12px;
+            color: #fff;
+            margin-top: 5px;
+        }
+
         /* Daily Reward Modal */
         .reward-modal {
             display: none;
@@ -263,27 +269,25 @@
 <body>
 
     <!-- Header Section -->
-    <!-- Header Section -->
-<div class="header">
-    <div class="icon-container">
-        <img src="material/images/your-logo.png" alt="User Logo">
-        <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
+    <div class="header">
+        <div class="icon-container">
+            <img src="material/images/your-logo.png" alt="User Logo">
+            <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
+        </div>
+        <div class="icon-container">
+            <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
+            <span class="icon-text">Airdrop</span>
+        </div>
     </div>
-    <div class="icon-container">
-        <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
-        <span class="icon-text" id="Airdrop>Airdrop</span> <!-- Airdrop text added -->
-    </div>
-</div>
 
-<!-- Airdrop Modal -->
-<div id="airdropModal" class="airdrop-modal">
-    <div class="airdrop-content">
-        <h2>Coming Soon</h2>
-        <p>The Airdrop feature will be available soon. Stay tuned!</p>
-        <button onclick="closeAirdropModal()">Close</button>
+    <!-- Airdrop Modal -->
+    <div id="airdropModal" class="airdrop-modal">
+        <div class="airdrop-content">
+            <h2>Coming Soon</h2>
+            <p>The Airdrop feature will be available soon. Stay tuned!</p>
+            <button onclick="closeAirdropModal()">Close</button>
+        </div>
     </div>
-</div>
-
 
     <!-- Logo and Points Section -->
     <div class="logo-container">
@@ -292,29 +296,17 @@
     </div>
 
     <!-- Daily Reward Icon -->
-    <i class="fas fa-coins daily-reward" onclick="claimDailyReward()"></i>
-
-    <!-- Additional Left Icons -->
-    <div class="additional-icons">
-        <div class="icon-item">
-            <i class="fas fa-star"></i>
-            <span class="coming-soon">Coming Soon</span>
-        </div>
-        <div class="icon-item">
-            <i class="fas fa-bolt"></i>
-            <span class="coming-soon">Coming Soon</span>
-        </div>
+    <div class="daily-reward" onclick="claimDailyReward()">
+        <i class="fas fa-coins"></i>
+        <div class="daily-reward-text">Daily Reward</div>
     </div>
 
-    <!-- Additional Right Icons -->
-    <div class="right-icons">
-        <div class="icon-item">
-            <i class="fas fa-heart"></i>
-            <span class="coming-soon">Coming Soon</span>
-        </div>
-        <div class="icon-item">
-            <i class="fas fa-moon"></i>
-            <span class="coming-soon">Coming Soon</span>
+    <!-- Daily Reward Modal -->
+    <div id="rewardModal" class="reward-modal">
+        <div class="reward-content">
+            <h2>Congratulations!</h2>
+            <p>You received 100 coins.</p>
+            <button onclick="closeRewardModal()">Close</button>
         </div>
     </div>
 
@@ -338,51 +330,26 @@
         </a>
     </nav>
 
-    <!-- Airdrop Modal -->
-    <div id="airdropModal" class="airdrop-modal">
-        <div class="airdrop-content">
-            <h2>Coming Soon</h2>
-            <p>The Airdrop feature will be available soon. Stay tuned!</p>
-            <button onclick="closeAirdropModal()">Close</button>
-        </div>
-    </div>
-
-    <!-- Daily Reward Modal -->
-    <div id="rewardModal" class="reward-modal">
-        <div class="reward-content">
-            <h2>Congratulations!</h2>
-            <p>You received 100 coins.</p>
-            <button onclick="closeRewardModal()">Close</button>
-        </div>
-    </div>
-
     <script>
-        // Fetch user ID from localStorage or sessionStorage
         let userId = localStorage.getItem("userId") ? localStorage.getItem("userId") : "Guest";
-
-        // Display user ID in the username span
         document.getElementById("username").innerText = userId;
 
-        // Initialize balance from localStorage
         let balance = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
         document.getElementById("balance").innerText = balance + " Coins";
 
-        // Open Airdrop Modal
         function openAirdropModal() {
             document.getElementById("airdropModal").style.display = "flex";
         }
 
-        // Close Airdrop Modal
         function closeAirdropModal() {
             document.getElementById("airdropModal").style.display = "none";
         }
 
-        // Daily Reward Logic
         function claimDailyReward() {
             let lastClaim = localStorage.getItem("lastDailyReward");
             let now = new Date().getTime();
 
-            if (!lastClaim || now - lastClaim >= 86400000) { // 24 hours in milliseconds
+            if (!lastClaim || now - lastClaim >= 86400000) {
                 balance += 100;
                 localStorage.setItem("coins", balance);
                 localStorage.setItem("lastDailyReward", now);
@@ -393,7 +360,6 @@
             }
         }
 
-        // Close Reward Modal
         function closeRewardModal() {
             document.getElementById("rewardModal").style.display = "none";
         }
