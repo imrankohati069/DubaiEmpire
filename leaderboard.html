@@ -3,99 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Dubai Empire - Leaderboard</title>
     <style>
-        /* Your existing CSS styles */
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #fff;
             margin: 0;
             padding: 0;
+            background: #80e2a9;
+            color: white;
         }
 
-        h2 {
-            font-size: 30px;
-            color: #ffd700;
-            margin: 20px 0;
-            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        h2 i {
-            margin-right: 10px;
-        }
-
-        .leaderboard-container {
-            margin: 20px auto;
-            max-width: 600px;
-        }
-
-        .user-card {
-            margin: 10px auto;
+        /* Header with Back Button */
+        header {
+            background: #222;
+            color: white;
             padding: 15px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            background-color: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-            color: #fff;
-        }
-
-        .user-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .user-details {
-            display: flex;
             align-items: center;
         }
 
-        .user-image img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid #ffd700;
-            margin-right: 15px;
+        header button {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
-        .user-info h4 {
+        header button:hover {
+            background-color: #e64a19;
+        }
+
+        h1 {
+            margin: 0;
             font-size: 20px;
-            color: #080808;
-            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            flex-grow: 1; /* Ensure header text is centered */
         }
 
-        .user-info p {
-            margin: 0;
-            font-size: 14px;
-            color: #ddd;
+        /* Leaderboard Styles */
+        .leaderboard {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .user-points {
+        .leaderboard-header {
+            background: #ff5722;
+            color: white;
+            padding: 10px 20px;
             font-size: 18px;
-            color: #0e0d0d;
             font-weight: bold;
+            display: flex;
+            justify-content: space-around; /* Center items horizontally */
+            align-items: center;
         }
 
-        .first-place {
-            background: linear-gradient(45deg, #ffb300, #ffcc00);
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            background: #222;
         }
 
-        .second-place {
-            background: linear-gradient(45deg, #ff7f00, #ffcc00);
+        .leaderboard-item:nth-child(odd) {
+            background: #333;
         }
 
-        .third-place {
-            background: linear-gradient(45deg, #ff4c00, #ffcc00);
+        .leaderboard-item .rank {
+            font-weight: bold;
+            font-size: 18px;
         }
 
+        .leaderboard-item .name {
+            flex: 1;
+            text-align: left;
+            margin-left: 20px;
+        }
+
+        .leaderboard-item .medal {
+            font-size: 20px;
+        }
+
+        /* Medal Colors */
+        .gold {
+            color: gold;
+        }
+
+        .silver {
+            color: silver;
+        }
+
+        .bronze {
+            color: #cd7f32;
+        }
+
+        /* Footer Navigation */
         .bottom-nav {
             display: flex;
             justify-content: space-evenly;
@@ -124,111 +136,83 @@
         .bottom-nav .nav-item:hover {
             color: #ffcc00;
         }
-
-        @media (max-width: 600px) {
-            .leaderboard-container {
-                max-width: 100%;
-            }
-
-            .user-card {
-                padding: 10px;
-            }
-
-            .user-info h4 {
-                font-size: 18px;
-            }
-
-            .user-points {
-                font-size: 16px;
-            }
-        }
     </style>
 </head>
 <body>
-    <h2><i class="fas fa-trophy"></i> LEADERBOARD</h2>
 
-    <!-- Leaderboard Section -->
-    <div class="leaderboard-container" id="leaderboard-container">
-        <!-- Dynamic User Cards will be inserted here -->
+<!-- Header with Back Button -->
+<header>
+    <button onclick="goBack()" aria-label="Go Back">Back</button>
+    <h1>Leaderboard</h1>
+</header>
+
+<div class="leaderboard">
+    <div class="leaderboard-header">
+        <span>Rank</span>
+        <span>Name</span>
+        <span>Medal</span>
     </div>
+    <!-- Dynamic Content -->
+    <div id="leaderboard-content"></div>
+</div>
 
-    <!-- Footer Navigation (Menu) -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="airdrop.html" class="nav-item">
-            <i class="fas fa-gift"></i>
-            <span>AIRDROP</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
+<!-- Footer Navigation -->
+<div class="bottom-nav">
+    <a class="nav-item" href="home.html"><i></i>Home</a>
+    <a class="nav-item" href="friends.html"><i></i>Friends</a>
+    <a class="nav-item" href="leaderboard.html"><i></i>Leaderboard</a>
+    <a class="nav-item" href="task.html"><i></i>Task</a>
+</div>
 
-    <script>
-        // Sample data - Ideally, you should fetch this data from a backend or localStorage
-        // Assuming user data is stored in localStorage as "users" array
-        const users = JSON.parse(localStorage.getItem("users")) || [
-            { name: "John Doe", balance: 500, img: "images/user1.png" },
-            { name: "Jane Smith", balance: 450, img: "images/user2.png" },
-            { name: "Chris Brown", balance: 400, img: "images/user3.png" },
-            { name: "Sara Lee", balance: 350, img: "images/user4.png" },
-            { name: "Mark Z", balance: 300, img: "images/user5.png" }
-        ];
+<script>
+    function goBack() {
+        window.history.back();
+    }
 
-        function updateLeaderboard() {
-            const leaderboardContainer = document.getElementById("leaderboard-container");
-            leaderboardContainer.innerHTML = ""; // Clear previous leaderboard
+    // Dummy Data for Top 100 Users
+    const leaderboardData = [
+        { name: "John Doe", score: 1500 },
+        { name: "Alice Smith", score: 1450 },
+        { name: "Bob Johnson", score: 1400 },
+        { name: "Mary Lee", score: 1350 },
+        { name: "Tom Hanks", score: 1300 },
+        // ... Add up to 100 users for demonstration
+    ];
 
-            // Sort users based on balance in descending order
-            users.sort((a, b) => b.balance - a.balance);
+    // Populate Dummy Data for 100 Entries
+    for (let i = 6; i <= 100; i++) {
+        leaderboardData.push({ name: `User ${i}`, score: 1000 - i });
+    }
 
-            // Generate user cards for leaderboard
-            users.forEach((user, index) => {
-                const userCard = document.createElement("div");
-                userCard.classList.add("user-card");
+    const leaderboardContent = document.getElementById("leaderboard-content");
 
-                // Add rank class based on index (1st, 2nd, 3rd)
-                if (index === 0) userCard.classList.add("first-place");
-                else if (index === 1) userCard.classList.add("second-place");
-                else if (index === 2) userCard.classList.add("third-place");
+    // Function to Populate Leaderboard
+    function populateLeaderboard(data) {
+        data.forEach((user, index) => {
+            const rank = index + 1; // Rank starts from 1
+            const leaderboardItem = document.createElement("div");
+            leaderboardItem.className = "leaderboard-item";
 
-                // Add content to user card
-                userCard.innerHTML = `
-                    <div class="user-details">
-                        <div class="user-image">
-                            <img src="${user.img}" alt="${user.name}">
-                        </div>
-                        <div class="user-info">
-                            <h4>${index + 1}th</h4>
-                            <p>${user.name}</p>
-                        </div>
-                    </div>
-                    <div class="user-points">${user.balance} Coins</div>
-                `;
+            // Medal or Rank Number
+            let medal = "";
+            if (rank === 1) medal = `<span class="medal gold">🥇</span>`;
+            else if (rank === 2) medal = `<span class="medal silver">🥈</span>`;
+            else if (rank === 3) medal = `<span class="medal bronze">🥉</span>`;
+            else medal = `<span>${rank}</span>`;
 
-                // Append user card to the leaderboard container
-                leaderboardContainer.appendChild(userCard);
-            });
-        }
+            leaderboardItem.innerHTML = `
+                <span class="rank">${medal}</span>
+                <span class="name">${user.name}</span>
+                <span>${user.score}</span>
+            `;
 
-        // Call the function to update leaderboard when the page loads
-        document.addEventListener("DOMContentLoaded", updateLeaderboard);
-    </script>
+            leaderboardContent.appendChild(leaderboardItem);
+        });
+    }
+
+    // Populate the leaderboard with dummy data
+    populateLeaderboard(leaderboardData);
+</script>
+
 </body>
 </html>
