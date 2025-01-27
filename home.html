@@ -263,13 +263,27 @@
 <body>
 
     <!-- Header Section -->
-    <div class="header">
-        <div class="icon-container">
-            <img src="material/images/your-logo.png" alt="User Logo">
-            <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
-        </div>
-        <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
+    <!-- Header Section -->
+<div class="header">
+    <div class="icon-container">
+        <img src="material/images/your-logo.png" alt="User Logo">
+        <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
     </div>
+    <div class="icon-container">
+        <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
+        <span class="icon-text">Airdrop</span> <!-- Airdrop text added -->
+    </div>
+</div>
+
+<!-- Airdrop Modal -->
+<div id="airdropModal" class="airdrop-modal">
+    <div class="airdrop-content">
+        <h2>Coming Soon</h2>
+        <p>The Airdrop feature will be available soon. Stay tuned!</p>
+        <button onclick="closeAirdropModal()">Close</button>
+    </div>
+</div>
+
 
     <!-- Logo and Points Section -->
     <div class="logo-container">
