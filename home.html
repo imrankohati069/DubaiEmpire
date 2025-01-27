@@ -3,92 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Dubai Empire</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #fff;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #80e2a9; /* Deep blue background */
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
-        .header {
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 0;
+            padding: 20px;
+            color: #f0a500; /* Gold color for title */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header Section */
+            .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px 20px;
+            background: rgba(13, 13, 14, 0.8); /* Transparent dark blue for header */
         }
 
-        .header .icon-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .header img {
+        .header .left img,
+        .header .right img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             margin-right: 10px;
         }
 
-        .header .icon-text {
-            font-size: 18px;
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        .logo-container {
-            margin: 50px auto 20px;
+        /* Center Section */
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 80px); /* Adjust for header height */
             position: relative;
         }
 
-        .logo-container img {
-            width: 120px;
-            animation: bounce 2s infinite;
+        .logo {
+            width: 300px; /* Logo size */
+            height: auto;
         }
 
-        #balance {
-            margin-top: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
+        /* Coins Display */
+        .coins {
+            position: absolute;
+            top: -40px; /* Positioned above logo */
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            color: #f0a500; /* Gold color for coin balance */
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
+        .coins img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
         }
 
-        .daily-reward-button {
-            background-color: #ffcc00;
-            color: #1a1a1a;
-            border: none;
-            padding: 15px 40px;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 50px;
-            margin-top: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .daily-reward-button:hover {
-            background-color: #ffb300;
-            transform: translateY(-3px);
-        }
-
+        /* Footer Section */
         .bottom-nav {
             display: flex;
             justify-content: space-evenly;
@@ -118,98 +110,103 @@
             color: #ffcc00;
         }
 
-        /* Modal for Daily Rewards */
-        .reward-modal {
-            display: none;
+        /* Daily Reward Icon */
+        .daily-reward {
+            position: fixed;
+            bottom: 140px; /* Positioned above footer */
+            right: 10px;
+            background-color: rgba(18, 30, 61, 0.8); /* Transparent dark blue */
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .daily-reward img {
+            width: 30px; /* Smaller icon size */
+            height: 30px;
+        }
+
+        .daily-reward div {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* Coming Soon Icons Section */
+        .coming-soon-icons {
+            position: fixed;
+            top: 80px; /* Positioned below the header */
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between icons */
+        }
+
+        .coming-soon {
+            background-color: rgba(18, 30, 61, 0.8);
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .coming-soon img {
+            width: 30px; /* Icon size */
+            height: 30px;
+        }
+
+        .coming-soon div {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #f0a500; /* Gold text */
+        }
+
+        /* Popup for Airdrop */
+        .popup {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(126, 196, 105, 0.7);
+            color: white;
+            display: none;
             justify-content: center;
             align-items: center;
         }
 
-        .reward-content {
-            background-color: #333;
+        .popup div {
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            border-radius: 12px;
+            text-align: center;
+            border-radius: 10px;
             width: 80%;
-            max-width: 500px;
-            text-align: center;
+            max-width: 400px;
         }
 
-        .reward-content h2 {
-            font-size: 24px;
-            color: #ffd700;
-        }
-
-        .reward-content p {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .reward-content button {
-            background-color: #ffcc00;
-            color: #1a1a1a;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .reward-content button:hover {
-            background-color: #ffb300;
-        }
-
-        .close-btn {
+        .popup button {
+            background-color: transparent;
             color: white;
-            font-size: 24px;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            cursor: pointer;
-        }
-
-        /* Cards for Daily Rewards */
-        .reward-card-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .reward-card {
-            background-color: #444;
-            padding: 15px;
-            border-radius: 12px;
-            color: #fff;
-            text-align: center;
-        }
-
-        .reward-card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .reward-card p {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .reward-card button {
-            background-color: #ffcc00;
-            color: #1a1a1a;
             border: none;
             padding: 10px 20px;
-            border-radius: 8px;
             cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 16px;
         }
 
-        .reward-card button:hover {
-            background-color: #ffb300;
+        .popup button:hover {
+            background-color: #ff5722;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 20px;
+            color: white;
+        }
+
+        .active-page {
+            display: block;
         }
 
     </style>
@@ -218,81 +215,21 @@
 
     <!-- Header Section -->
     <div class="header">
-        <div class="icon-container">
-            <img src="material/images/your-logo.png" alt="User Logo">
-            <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
-        </div>   
-    </div>
-
-    <!-- Logo and Points Section -->
-    <div class="logo-container">
-        <img src="material/images/coin-logo.png" alt="Coin Logo">
-        <div id="balance">0 Coins</div> <!-- Default display -->
-    </div>
-
-    <!-- Daily Reward Button -->
-    <button class="daily-reward-button" onclick="openRewardModal()">Claim Daily Reward</button>
-
-    <!-- Daily Reward Modal -->
-    <div id="rewardModal" class="reward-modal">
-        <div class="reward-content">
-            <span class="close-btn" onclick="closeRewardModal()">&times;</span>
-            <h2>Claim Your Daily Reward</h2>
-            
-            <!-- Reward Cards -->
-            <div class="reward-card-container">
-                <!-- Day 1 -->
-                <div class="reward-card">
-                    <h3>Day 1</h3>
-                    <p>100 Coins</p>
-                    <button onclick="claimReward(100)">Claim</button>
-                </div>
-                
-                <!-- Day 2 -->
-                <div class="reward-card">
-                    <h3>Day 2</h3>
-                    <p>200 Coins</p>
-                    <button onclick="claimReward(200)">Claim</button>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="reward-card">
-                    <h3>Day 3</h3>
-                    <p>300 Coins</p>
-                    <button onclick="claimReward(300)">Claim</button>
-                </div>
-
-                <!-- Day 4 -->
-                <div class="reward-card">
-                    <h3>Day 4</h3>
-                    <p>400 Coins</p>
-                    <button onclick="claimReward(400)">Claim</button>
-                </div>
-
-                <!-- Day 5 -->
-                <div class="reward-card">
-                    <h3>Day 5</h3>
-                    <p>500 Coins</p>
-                    <button onclick="claimReward(500)">Claim</button>
-                </div>
-
-                <!-- Day 6 -->
-                <div class="reward-card">
-                    <h3>Day 6</h3>
-                    <p>600 Coins</p>
-                    <button onclick="claimReward(600)">Claim</button>
-                </div>
-
-                <!-- Day 7 -->
-                <div class="reward-card">
-                    <h3>Day 7</h3>
-                    <p>700 Coins</p>
-                    <button onclick="claimReward(700)">Claim</button>
-                </div>
-            </div>
-            <!-- Close Button -->
-            <button onclick="closeRewardModal()">Close</button>
+        <div class="left">
+            <img src="material/images/your-logo.png" alt="Username Icon"> <!-- Replace with your username icon -->
         </div>
+        <div class="right">
+            <img src="material/images/parachute.png" alt="Airdrop Icon" onclick="showAirdropPopup()"> <!-- Replace with your airdrop icon -->
+        </div>
+    </div>
+
+    <!-- Center Section -->
+    <div class="center">
+        <div class="coins">
+            <img src="material/images/coin-logo.png" alt="Coin Icon"> <!-- Replace with your coin icon -->
+            <span id="coinBalance">0</span> 
+        </div>
+        <img src="material/images/coin-logo.png" alt="Logo" class="logo"> <!-- Replace with your logo path -->
     </div>
 
     <!-- Footer Navigation (Menu) -->
@@ -301,105 +238,134 @@
             <i class="fas fa-home"></i>
             <span>HOME</span>
         </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="airdrop.html" class="nav-item">
-            <i class="fas fa-gift"></i>
-            <span>AIRDROP</span>
-        </a>
         <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
             <span>FRIENDS</span>
         </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a> 
         <a href="task.html" class="nav-item">
             <i class="fas fa-tasks"></i>
             <span>TASKS</span>
         </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
     </nav>
 
+ <!-- Daily Reward Icon -->
+ <div class="daily-reward" onclick="claimReward()">
+    <img src="material/images/daily reward.png" alt="Daily Reward Icon"> <!-- Replace with your reward icon -->
+    <div>Daily Reward</div>
+</div>  
+
+ 
+<div id="friendsPage" class="page">
+    <h2>Friends Page</h2>
+    <p>Here you can manage your friends!</p>
+</div>
+<div id="leaderboardPage" class="page">
+    <h2>Leaderboard Page</h2>
+    <p>Here you can view the leaderboard!</p>
+</div>
+<div id="taskPage" class="page">
+    <h2>Task Page</h2>
+    <p>Complete tasks to earn rewards!</p>
+</div>  
+
+    <!-- Coming Soon Icons Section -->
+    <div class="coming-soon-icons">
+        <!-- First Coming Soon Icon -->
+        <div class="coming-soon">
+            <img src="material/images/icon1.png" alt="Icon 1"> <!-- Replace with your icon 1 -->
+            <div>Coming Soon</div>
+        </div>
+
+        <!-- Second Coming Soon Icon -->
+        <div class="coming-soon">
+            <img src="material/images/icon2.png" alt="Icon 2"> <!-- Replace with your icon 2 -->
+            <div>Coming Soon</div>
+        </div>
+
+        <!-- Third Coming Soon Icon -->
+        <div class="coming-soon">
+            <img src="material/images/icon3.png" alt="Icon 3"> <!-- Replace with your icon 3 -->
+            <div>Coming Soon</div>
+        </div>
+    </div>
+ 
+    <!-- Popup for Airdrop -->
+    <div id="airdropPopup" class="popup">
+        <div>
+            <p>Coming Soon</p>
+            <button onclick="closeAirdropPopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Pop-up for Claim -->
+    <div id="popup" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); color: white; display: flex; justify-content: center; align-items: center;">
+        <div style="background: rgba(0, 0, 0, 0.9); padding: 20px; text-align: center; border-radius: 10px;">
+            <p id="popupMessage"></p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
     <script>
-        // Fetch user ID from localStorage or sessionStorage
-        let userId = localStorage.getItem("userId") ? localStorage.getItem("userId") : "Guest";
+        let rewardClaimed = false;
+        let coinBalance = 0;
 
-        // Display user ID in the username span
-        document.getElementById("username").innerText = userId;
-
-        // Initialize balance from localStorage
-        let balance = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        document.getElementById("balance").innerText = balance + " Coins";
-
-        // Initialize last claim date from localStorage
-        let lastClaimDate = localStorage.getItem("lastClaimDate");
-        let currentDate = new Date().toLocaleDateString();
-
-        // Check if the user has already claimed today
-        function canClaimToday() {
-            if (lastClaimDate === currentDate) {
-                return false; // Already claimed today
-            }
-            return true; // Can claim today
+        // Function to update the coin balance display
+        function updateBalance() {
+            document.getElementById("coinBalance").innerText = coinBalance;
         }
 
-        // Open Reward Modal
-        function openRewardModal() {
-            if (!canClaimToday()) {
-                alert("You have already claimed your reward today.");
-                return;
+        // Function for claiming the daily reward
+        function claimReward() {
+            if (rewardClaimed) {
+                showPopup("You already claimed.");
+            } else {
+                rewardClaimed = true;
+                coinBalance += 100; // Add 100 coins to balance
+                updateBalance();
+                showPopup("You claimed 100 coins.");
+                setTimeout(function() {
+                    rewardClaimed = false;
+                }, 86400000); // Reset after 1 day (24 hours)
             }
-            document.getElementById("rewardModal").style.display = "flex";
         }
 
-        // Close Reward Modal
-        function closeRewardModal() {
-            document.getElementById("rewardModal").style.display = "none";
+        // Function to show the pop-up message
+        function showPopup(message) {
+            document.getElementById("popupMessage").innerText = message;
+            document.getElementById("popup").style.display = "flex";
         }
 
-        // Claim Reward
-        function claimReward(amount) {
-            if (!canClaimToday()) {
-                alert("You have already claimed your reward today.");
-                return;
-            }
+        // Function to close the pop-up
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
 
-            balance += amount;  // Add the claimed reward to the balance
-            localStorage.setItem("coins", balance);  // Save the updated balance
-            localStorage.setItem("lastClaimDate", currentDate);  // Save the last claim date
-            document.getElementById("balance").innerText = balance + " Coins";  // Update the displayed balance
+        // Function to show Airdrop popup
+        function showAirdropPopup() {
+            document.getElementById("airdropPopup").style.display = "flex";
+        }
 
-            alert("Congratulations! You have claimed your " + amount + " coins!");
+        // Function to close Airdrop popup
+        function closeAirdropPopup() {
+            document.getElementById("airdropPopup").style.display = "none";
+        }
 
-            // Disable claim buttons for today
-            let buttons = document.querySelectorAll(".reward-card button");
-            buttons.forEach(button => {
-                button.disabled = true;
-                button.innerText = "Claimed";
+        // Function to show pages
+        function showPage(page) {
+            // Hide all pages
+            let pages = document.querySelectorAll('.page');
+            pages.forEach(function(p) {
+                p.classList.remove('active-page');
             });
+
+            // Show the selected page
+            document.getElementById(page + 'Page').classList.add('active-page');
         }
-
-        // Check and update claimable status for each day
-        function updateClaimStatus() {
-            let currentDate = new Date().toLocaleDateString();
-
-            // Disable claim button if already claimed today
-            if (lastClaimDate === currentDate) {
-                let buttons = document.querySelectorAll(".reward-card button");
-                buttons.forEach(button => {
-                    button.disabled = true;
-                    button.innerText = "Claimed";
-                });
-            }
-        }
-
-        // Initialize claim status on page load
-        updateClaimStatus();
     </script>
 
 </body>
 </html>
-
