@@ -8,23 +8,43 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
             margin: 0;
             padding: 0;
-            color: #fff;
         }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
             background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+        }
+
+        .header .icon-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .header .icon-text {
+            font-size: 18px;
+            color: #ffd700;
+            font-weight: bold;
         }
 
         .logo-container {
-            text-align: center;
-            margin-top: 50px;
+            margin: 80px auto 20px;
+            position: relative;
         }
 
         .logo-container img {
@@ -33,10 +53,13 @@
         }
 
         #balance {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -70%);
             font-size: 32px;
             font-weight: bold;
             color: #ffd700;
-            margin-top: 10px;
         }
 
         @keyframes bounce {
@@ -51,35 +74,19 @@
             }
         }
 
-        .bottom-nav {
-            display: flex;
-            justify-content: space-evenly;
-            background-color: rgba(0, 0, 0, 0.8);
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            padding: 10px 0;
-            border-top: 2px solid #444;
+        /* Airdrop Icon */
+        .airdrop-icon {
+            font-size: 24px;
+            color: #ffd700;
+            cursor: pointer;
         }
 
-        .nav-item {
-            color: #fff;
-            text-align: center;
-            font-size: 12px;
-            flex-grow: 1;
-        }
-
-        .nav-item i {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .nav-item:hover {
-            color: #ffcc00;
+        .airdrop-icon:hover {
+            color: #ffb300;
         }
 
         /* Airdrop Modal */
-        .airdrop-modal, .reward-modal {
+        .airdrop-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -91,7 +98,7 @@
             align-items: center;
         }
 
-        .modal-content {
+        .airdrop-content {
             background-color: #333;
             padding: 20px;
             border-radius: 12px;
@@ -100,17 +107,17 @@
             text-align: center;
         }
 
-        .modal-content h2 {
+        .airdrop-content h2 {
             font-size: 24px;
             color: #ffd700;
         }
 
-        .modal-content p {
+        .airdrop-content p {
             font-size: 18px;
             color: #fff;
         }
 
-        .modal-content button {
+        .airdrop-content button {
             background-color: #ffcc00;
             color: #1a1a1a;
             padding: 10px 20px;
@@ -120,108 +127,191 @@
             transition: background-color 0.3s;
         }
 
-        .modal-content button:hover {
+        .airdrop-content button:hover {
             background-color: #ffb300;
         }
 
         /* Daily Reward Icon */
         .daily-reward {
             position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 50px;
+            left: 10px;
+            top: 40%;
+            transform: translateY(-50%);
+            font-size: 20px;
             color: #ffcc00;
             cursor: pointer;
         }
 
-        .daily-reward-text {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
+        .daily-reward:hover {
+            color: #ffb300;
+        }
+
+        /* Daily Reward Modal */
+        .reward-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reward-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .reward-content h2 {
+            font-size: 24px;
             color: #ffd700;
         }
 
+        .reward-content p {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .reward-content button {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .reward-content button:hover {
+            background-color: #ffb300;
+        }
+
+        /* Footer Navigation (Menu) */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid #444;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-nav .nav-item {
+            color: #fff;
+            font-size: 12px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .bottom-nav .nav-item:hover {
+            color: #ffcc00;
+        }
     </style>
 </head>
 <body>
 
     <!-- Header Section -->
     <div class="header">
-        <div class="logo-container">
-            <img src="material/images/your-logo.png" alt="Logo">
-            <div id="username">Username</div>
+        <div class="icon-container">
+            <img src="material/images/your-logo.png" alt="User Logo">
+            <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
         </div>
-        <div>
+        <div class="icon-container">
             <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
-            <div>Airdrop</div>
+            <span class="icon-text">Airdrop</span>
         </div>
     </div>
 
     <!-- Airdrop Modal -->
     <div id="airdropModal" class="airdrop-modal">
-        <div class="modal-content">
+        <div class="airdrop-content">
             <h2>Coming Soon</h2>
             <p>The Airdrop feature will be available soon. Stay tuned!</p>
             <button onclick="closeAirdropModal()">Close</button>
         </div>
     </div>
 
-    <!-- Logo and Balance Section -->
+    <!-- Logo and Points Section -->
     <div class="logo-container">
         <img src="material/images/coin-logo.png" alt="Coin Logo">
-        <div id="balance">0 Coins</div>
+        <div id="balance">0 Coins</div> <!-- Default display -->
     </div>
 
-    <!-- Daily Reward Icon and Text -->
-    <div class="daily-reward" onclick="claimDailyReward()">
-        <i class="fas fa-coins"></i>
-    </div>
-    <div class="daily-reward-text">Daily Reward</div>
+    <!-- Daily Reward Icon -->
+    <i class="fas fa-coins daily-reward" onclick="claimDailyReward()"></i>
+    <span style="font-size: 14px; color: #fff; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">Daily Reward</span>
+
+    <!-- Footer Navigation (Menu) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
 
     <!-- Daily Reward Modal -->
     <div id="rewardModal" class="reward-modal">
-        <div class="modal-content">
+        <div class="reward-content">
             <h2>Congratulations!</h2>
             <p>You received 100 coins.</p>
             <button onclick="closeRewardModal()">Close</button>
         </div>
     </div>
 
-    <!-- Footer Navigation -->
-    <nav class="bottom-nav">
-        <div class="nav-item"><i class="fas fa-home"></i><div>HOME</div></div>
-        <div class="nav-item"><i class="fas fa-trophy"></i><div>LEADERBOARD</div></div>
-        <div class="nav-item"><i class="fas fa-tasks"></i><div>TASKS</div></div>
-        <div class="nav-item"><i class="fas fa-wallet"></i><div>BALANCE</div></div>
-    </nav>
-
     <script>
-        // Fetch user data
+        // Fetch user ID from localStorage or sessionStorage
         let userId = localStorage.getItem("userId") ? localStorage.getItem("userId") : "Guest";
+
+        // Display user ID in the username span
         document.getElementById("username").innerText = userId;
 
-        // Initialize balance
+        // Initialize balance from localStorage
         let balance = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
         document.getElementById("balance").innerText = balance + " Coins";
 
-        // Airdrop modal functions
+        // Open Airdrop Modal
         function openAirdropModal() {
             document.getElementById("airdropModal").style.display = "flex";
         }
 
+        // Close Airdrop Modal
         function closeAirdropModal() {
             document.getElementById("airdropModal").style.display = "none";
         }
 
-        // Daily reward logic
+        // Daily Reward Logic
         function claimDailyReward() {
             let lastClaim = localStorage.getItem("lastDailyReward");
             let now = new Date().getTime();
 
-            if (!lastClaim || now - lastClaim >= 86400000) { // 24 hours in ms
+            if (!lastClaim || now - lastClaim >= 86400000) { // 24 hours in milliseconds
                 balance += 100;
                 localStorage.setItem("coins", balance);
                 localStorage.setItem("lastDailyReward", now);
@@ -232,6 +322,7 @@
             }
         }
 
+        // Close Reward Modal
         function closeRewardModal() {
             document.getElementById("rewardModal").style.display = "none";
         }
