@@ -1,79 +1,189 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./assets/3.4.5"></script>
-  <style>
-    body,
-    html {
-      height: 100%;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Empire - Friends</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #80e2a9;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100vh;
+        }
 
-    .full-height {
-      height: 108%;
-    }
-  </style>
-  <link rel="stylesheet" href="./assets/css/style-2.css">
-  <link rel="stylesheet" href="./assets/css/responsive-1.css">
+        /* Header */
+        header {
+            width: 100%;
+            background-color: #222;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        header button {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        header button:hover {
+            background-color: #e64a19;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 auto;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Logo */
+        .logo {
+            width: 200px;
+            margin: 40px auto 20px auto;
+        }
+
+        /* Sections */
+        .sections {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .invite-section, .copy-url-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Footer Section */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid #444;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-nav .nav-item {
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav .nav-item:hover {
+            color: #ffcc00;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 480px) {
+            .logo {
+                width: 150px;
+            }
+            .invite-section, .copy-url-section {
+                width: 90%;
+            }
+            header button {
+                padding: 8px;
+            }
+        }
+    </style>
 </head>
+<body>
 
-<body class="boost">
-  <div class=" text-white p-4 rounded-lg max-w-md mx-auto full-height flex flex-col">
-    <div class="flex justify-between items-center mb-4">
-      <a href="index.html">
-        <svg width="35px" height="35px" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-      </a>
-    </div>
-    <div class="flex-grow overflow-auto">
-      <h2 class="text-center text-2xl font-bold mb-2">Invite friends!</h2>
-      <p class="text-center mb-4">You and your friend will receive bonuses</p>
-      <div class="space-y-4">
-        <div class="bg-slate-900 p-4 flex items-center rounded-3xl shadow-lg">
-          <img src="./assets/images/f.png" width="50px" height="50px" alt="gift" class="w-12 h-12 mr-4">   
-          <div>
-            <p class="font-bold">Invite a friend</p>
-            <p class="text-yellow-400">+5,000 for you and your friend</p>
-          </div>
+    <!-- Header with Back Button -->
+    <header>
+        <button onclick="goBack()" aria-label="Go Back">Back</button>
+        <h1>Invite Friends & Get Rewards</h1>
+    </header>
+
+    <!-- Centered Logo -->
+    <img src="material/images/coin-logo.png" alt="Dubai Empire Logo" class="logo" title="Dubai Empire Logo">
+
+    <!-- Sections for Invite and Copy -->
+    <div class="sections">
+        <div class="invite-section">
+            <button class="invite-button" onclick="shareReferralLink()" aria-label="Invite Friends">Invite Friends</button>
         </div>
-      </div>
+        <div class="copy-url-section">
+            <button class="copy-url-button" onclick="copyReferralLink()" aria-label="Copy Referral URL">Copy Referral URL</button>
+        </div>
+    </div>
 
-      <h3 class="mt-6 mb-2">List of your friends (0)</h3><div class="space-y-2"><div class="space-y-2"></div>    </div>
-  </div>
-  <button id="inviteButton" class="bg-slate-900 hover:bg-slate-900/95 text-white w-full py-6 mt-4 rounded-3xl shadow-lg flex items-center justify-center">
-    <span>Invite a friend</span>
-  </button>
-  <p id="copyMessage" class="text-center text-green-500 mt-4 hidden">Copy Success..!</p>
-  </div>
+    <!-- Footer Navigation -->
+    <div class="bottom-nav">
+        <a class="nav-item" href="home.html"><i></i>Home</a>
+        <a class="nav-item" href="friends.html"><i></i>Friends</a>
+        <a class="nav-item" href="leaderboard.html"><i></i>Leaderboard</a>
+        <a class="nav-item" href="task.html"><i></i>Task</a>
+    </div>
 
-  <script>
-    
-    var chatId = "<?php echo isset($_GET['chat_id']) ? htmlspecialchars($_GET['chat_id']) : ''; ?>";
-    
-    document.getElementById('inviteButton').addEventListener('click', function() {
-    
-      const textToCopy = "https://t.me/share/url?url=https://t.me/pandacoinbyhtmlhero_bot?start=" + chatId + "&text=Join%20me%20in%20pandaCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!";
-      
-      navigator.clipboard.writeText(textToCopy).then(function() {
-        const copyMessage = document.getElementById('copyMessage');
-        copyMessage.classList.remove('hidden');
-        copyMessage.classList.add('block');
+    <script>
+        function goBack() {
+            window.history.back();
+        }
 
-        setTimeout(function() {
-          copyMessage.classList.remove('block');
-          copyMessage.classList.add('hidden');
-          window.location = "https://t.me/share/url?url=https://t.me/pandacoinbyhtmlhero_bot?start=" + chatId + "&text=Join%20me%20in%20pandaCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!"
-        }, 2000);
-      }).catch(function(err) {
-        console.error('Error in copying text: ', err);
-      });
-    });
-  </script>
+        function shareReferralLink() {
+            const referralUrl = "https://yourgame.com/referral";
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join Dubai Empire!',
+                    text: 'Get more rewards by joining Dubai Empire. Check it out!',
+                    url: referralUrl
+                }).catch(err => console.error('Sharing failed:', err));
+            } else {
+                alert('Sharing is not supported on this device.');
+            }
+        }
+
+        function copyReferralLink() {
+            const referralUrl = "https://yourgame.com/referral";
+            navigator.clipboard.writeText(referralUrl)
+                .then(() => alert('Referral URL copied to clipboard!'))
+                .catch(err => console.error('Failed to copy:', err));
+        }
+    </script>
 </body>
-
 </html>
