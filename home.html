@@ -20,7 +20,7 @@
             justify-content: space-between;
             align-items: center;
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px 20px;
+            padding: 8px 15px; /* Reduced padding */
         }
 
         .header .icon-container {
@@ -30,14 +30,14 @@
         }
 
         .header img {
-            width: 40px;
-            height: 40px;
+            width: 30px; /* Reduced size */
+            height: 30px; /* Reduced size */
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 8px; /* Adjusted margin */
         }
 
         .header .icon-text {
-            font-size: 18px;
+            font-size: 16px; /* Reduced font size */
             color: #ffd700;
             font-weight: bold;
         }
@@ -74,8 +74,40 @@
             }
         }
 
+        .bottom-nav {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid #444;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-nav .nav-item {
+            color: #fff;
+            font-size: 12px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .bottom-nav .nav-item:hover {
+            color: #ffcc00;
+        }
+
         /* Airdrop Icon */
         .airdrop-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
             font-size: 24px;
             color: #ffd700;
             cursor: pointer;
@@ -192,34 +224,39 @@
             background-color: #ffb300;
         }
 
-        /* Footer Navigation (Menu) */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-evenly;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid #444;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        /* Additional Icons */
+        .additional-icons {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .bottom-nav .nav-item {
-            color: #fff;
-            font-size: 12px;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bottom-nav .nav-item i {
-            font-size: 16px;
-            margin-bottom: 3px;
-        }
-
-        .bottom-nav .nav-item:hover {
+        .icon-item {
+            margin-top: 10px;
+            font-size: 20px;
             color: #ffcc00;
+            position: relative;
+            text-align: left;
+        }
+
+        .icon-item:hover {
+            color: #ffb300;
+        }
+
+        .icon-item .coming-soon {
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            left: 30px;
+            top: 0;
+        }
+
+        .right-icons {
+            position: absolute;
+            right: 10px;
+            top: 40%;
+            transform: translateY(-50%);
         }
     </style>
 </head>
@@ -229,11 +266,11 @@
     <div class="header">
         <div class="icon-container">
             <img src="material/images/your-logo.png" alt="User Logo">
-            <span class="icon-text" id="username">Username</span> <!-- Dynamic username here -->
+            <span class="icon-text" id="username">Username</span>
         </div>
         <div class="icon-container">
             <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
-            <span class="icon-text">Airdrop</span>
+            <span class="icon-text">Airdrop</span> <!-- Airdrop text -->
         </div>
     </div>
 
@@ -252,9 +289,9 @@
         <div id="balance">0 Coins</div> <!-- Default display -->
     </div>
 
-    <!-- Daily Reward Icon -->
+    <!-- Daily Reward Icon with Text -->
     <i class="fas fa-coins daily-reward" onclick="claimDailyReward()"></i>
-    <span style="font-size: 14px; color: #fff; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">Daily Reward</span>
+    <span class="icon-text">Daily Reward</span> <!-- Text below icon -->
 
     <!-- Footer Navigation (Menu) -->
     <nav class="bottom-nav">
