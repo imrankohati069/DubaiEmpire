@@ -179,9 +179,11 @@
         }
 
         .daily-reward-text {
-            font-size: 12px;
-            color: #fff;
-            margin-top: 5px;
+            position: absolute;
+            left: 10px;
+            top: 60%;
+            color: #ffd700;
+            font-size: 14px;
         }
 
         /* Daily Reward Modal */
@@ -229,41 +231,6 @@
         .reward-content button:hover {
             background-color: #ffb300;
         }
-
-        /* Additional Icons */
-        .additional-icons {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .icon-item {
-            margin-top: 10px;
-            font-size: 20px;
-            color: #ffcc00;
-            position: relative;
-            text-align: left;
-        }
-
-        .icon-item:hover {
-            color: #ffb300;
-        }
-
-        .icon-item .coming-soon {
-            font-size: 12px;
-            color: #fff;
-            position: absolute;
-            left: 30px;
-            top: 0;
-        }
-
-        .right-icons {
-            position: absolute;
-            right: 10px;
-            top: 40%;
-            transform: translateY(-50%);
-        }
     </style>
 </head>
 <body>
@@ -276,7 +243,7 @@
         </div>
         <div class="icon-container">
             <i class="fas fa-gift airdrop-icon" onclick="openAirdropModal()"></i>
-            <span class="icon-text">Airdrop</span>
+            <span class="icon-text">Airdrop</span> <!-- Airdrop text added -->
         </div>
     </div>
 
@@ -296,10 +263,8 @@
     </div>
 
     <!-- Daily Reward Icon -->
-    <div class="daily-reward" onclick="claimDailyReward()">
-        <i class="fas fa-coins"></i>
-        <div class="daily-reward-text">Daily Reward</div>
-    </div>
+    <i class="fas fa-coins daily-reward" onclick="claimDailyReward()"></i>
+    <div class="daily-reward-text">Daily Reward</div> <!-- Added the text below the icon -->
 
     <!-- Daily Reward Modal -->
     <div id="rewardModal" class="reward-modal">
@@ -331,25 +296,30 @@
     </nav>
 
     <script>
+        // Fetch user ID from localStorage or sessionStorage
         let userId = localStorage.getItem("userId") ? localStorage.getItem("userId") : "Guest";
         document.getElementById("username").innerText = userId;
 
+        // Initialize balance from localStorage
         let balance = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
         document.getElementById("balance").innerText = balance + " Coins";
 
+        // Open Airdrop Modal
         function openAirdropModal() {
             document.getElementById("airdropModal").style.display = "flex";
         }
 
+        // Close Airdrop Modal
         function closeAirdropModal() {
             document.getElementById("airdropModal").style.display = "none";
         }
 
+        // Daily Reward Logic
         function claimDailyReward() {
             let lastClaim = localStorage.getItem("lastDailyReward");
             let now = new Date().getTime();
 
-            if (!lastClaim || now - lastClaim >= 86400000) {
+            if (!lastClaim || now - lastClaim >= 86400000) { // 24 hours in milliseconds
                 balance += 100;
                 localStorage.setItem("coins", balance);
                 localStorage.setItem("lastDailyReward", now);
@@ -360,6 +330,7 @@
             }
         }
 
+        // Close Reward Modal
         function closeRewardModal() {
             document.getElementById("rewardModal").style.display = "none";
         }
