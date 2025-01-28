@@ -1,194 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Page with Icons</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #80e2a9;
-            color: white;
-        }
-
-        header {
-            width: 100%;
-            background-color: #222;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 24px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .task-container {
-            width: 80%;
-            margin: 10px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .task-section {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .task-section img {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            border-radius: 50%;
-            background: white;
-        }
-
-        .task-info {
-            flex: 1;
-            text-align: left;
-        }
-
-        .task-info p {
-            margin: 5px 0;
-        }
-
-        .task-button {
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .task-button:hover {
-            background-color: #e64a19;
-        }
-
-        .bottom-nav {
-            display: flex;
-            justify-content: space-evenly;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid #444;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .bottom-nav .nav-item {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0c0c0c, #000000);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .header {
+      background: #000000;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header button {
+      background:rgba(5, 5, 5, 0.993);
+      color: #fdfdf7;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .tasks {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .task-card {
+      background:#000000;
+      color: #fffefe;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .task-card h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .task-card p {
+      font-size: 12px;
+      margin: 0 0 10px;
+    }
+    .task-card .icon img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    .task-card button {
+      margin-top: 15px;
+      background: rgba(17, 17, 17, 0.993);
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .task-card button:hover {
+      background: #f1e100;
+    }
+    .footer {
+      background: rgba(0, 0, 0, 0.993);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    .footer button {
+      background: none;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .footer button img {
+      width: 24px;
+      height: 24px;
+    }
+    .reward {
+      font-size: 14px;
+      color: #f7f7f7;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <button onclick="goBack()">&#8592; Back</button>
-        <h1></h1>
-    </header>
 
-    <div class="task-container" id="task-container">
-        <!-- Sections will be added dynamically by JavaScript -->
+  <div class="header">
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <div class="tasks">
+    <div class="task-card" id="youtube-task">
+      <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+      <h2>YouTube Channel</h2>
+      <div class="reward">Reward: 50 Coins</div>
+      <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+      <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+      <button id="complete-button" style="display: none;" disabled>Complete</button>
     </div>
 
-    <div class="bottom-nav">
-        <a class="nav-item" href="home.html">Home</a>
-        <a class="nav-item" href="friends.html">Friends</a>
-        <a class="nav-item" href="leaderboard.html">Leaderboard</a>
-        <a class="nav-item" href="task.html">Task</a>
+        <div class="task-card" id="youtube-task">
+          <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+          <h2>YouTube Channel</h2>
+          <div class="reward">Reward: 50 Coins</div>
+          <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+          <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+          <button id="complete-button" style="display: none;" disabled>Complete</button>
+        </div>
+        <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div> 
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div> 
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div> 
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div>  
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div>  
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div>  
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div>  
+          <div class="task-card" id="youtube-task">
+            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
+            <h2>YouTube Channel</h2>
+            <div class="reward">Reward: 50 Coins</div>
+            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
+            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
+            <button id="complete-button" style="display: none;" disabled>Complete</button>
+          </div>  
     </div>
 
-    <script>
-        const tasks = [
-            { id: 1, name: 'Daily Ads', reward: 50, type: 'daily', icon: 'ad-icon.png' },
-            { id: 2, name: 'Join our Telegram Channel', reward: 50, url: 'https://telegram.org', icon: 'telegram.png' },
-            { id: 3, name : 'Subcribe youtube Channel', reward: 50, url: 'https://youtube.com', icon: 'youtube.png' },
-            { id: 4, name: 'Follow Twitter', reward: 50, url: 'https://twitter.com', icon: 'twitter-icon.png' },
-            { id: 5, name: 'Subscribe youtube Channel', reward: 50, url: 'https://youtube.com', icon: 'youtube.png' },
-            { id: 6, name : 'Subcribe youtube Channel', reward: 50, url: 'https://youtube.com', icon: 'youtube.png' },
-            { id: 7, name : 'Follow instagram ', reward: 50, url: 'https://youtube.com', icon: 'youtube.png' },
-            { id: 8, name : 'Follow Facebook', reward: 50, url: 'https://facebook.com', icon: 'youtube.png' },
-            { id: 9, name : 'Follow Facebook', reward: 50, url: 'https://facebook.com', icon: 'youtube.png' },
-        ];
+  <div class="footer">
+    <button onclick="navigateTo('home')">
+      <img src="home-icon.png" alt="Home">
+      Home
+    </button>
+    <button onclick="navigateTo('friends')">
+      <img src="friends-icon.png" alt="Friends">
+      Friends
+    </button>
+    <button onclick="navigateTo('leaderboard')">
+      <img src="material/images/fa.png" alt="Leaderboard">
+      Leaderboard
+    </button>
+    <button onclick="navigateTo('task')">
+      <img src="task-icon.png" alt="Task">
+      Task
+    </button>
+  </div>
 
-        const taskContainer = document.getElementById('task-container');
-        let userBalance = parseInt(localStorage.getItem('userBalance')) || 0; // Fetch balance from localStorage
+  <script>
+    let rewards = 0;
 
-        // Function to render tasks
-        function renderTasks() {
-            taskContainer.innerHTML = '';
-            tasks.forEach(task => {
-                taskContainer.innerHTML += `
-                    <div class="task-section">
-                        <img src="${task.icon}" alt="${task.name}" />
-                        <div class="task-info">
-                            <p>${task.name}</p>
-                            <p>${task.reward} Coins</p>
-                        </div>
-                        ${
-                            task.type === 'daily'
-                                ? `<button class="task-button" onclick="startDailyTask()">Start</button>`
-                                : `<button class="task-button" onclick="startTask('${task.url}')">Start</button>`
-                        }
-                    </div>
-                `;
-            });
-        }
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        alert('No previous page found!');
+      }
+    }
 
-        // Function for daily ads task
-        function startDailyTask() {
-            const dailyTaskButton = event.target;
-            dailyTaskButton.disabled = true;
-            dailyTaskButton.textContent = 'Ad Running...';
+    function navigateTo(section) {
+      switch (section) {
+        case 'home':
+          alert('Navigating to Home');
+          break;
+        case 'friends':
+          alert('Navigating to Friends');
+          break;
+        case 'leaderboard':
+          alert('Navigating to Leaderboard');
+          break;
+        case 'task':
+          alert('Navigating to Task');
+          break;
+        default:
+          alert('Invalid Section');
+      }
+    }
 
-            let timeLeft = 15; // 15 seconds timer
-            const timer = setInterval(() => {
-                dailyTaskButton.textContent = `Ad Running... (${timeLeft}s)`;
-                timeLeft--;
+    function startTask(task) {
+      if (task === 'youtube') {
+        window.open('https://www.youtube.com', '_blank');
+        document.getElementById('start-button').style.display = 'none';
+        setTimeout(() => {
+          document.getElementById('claim-button').style.display = 'inline-block';
+        }, 10000); // Show claim button after 10 seconds
+      }
+    }
 
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    userBalance += 50; // Add reward to balance
-                    localStorage.setItem('userBalance', userBalance); // Save balance
-                    dailyTaskButton.disabled = false; // Reset button for reuse
-                    dailyTaskButton.textContent = 'Start';
-                    alert('Task Complete! Coins added to balance.');
-                }
-            }, 1000);
-        }
+    function claimReward(task) {
+      if (task === 'youtube') {
+        rewards += 50;
+        document.getElementById('claim-button').style.display = 'none';
+        const completeButton = document.getElementById('complete-button');
+        completeButton.style.display = 'inline-block';
+        completeButton.disabled = false;
+      }
+    }
+  </script>
 
-        // Function to start other tasks
-        function startTask(url) {
-            window.open(url, '_blank'); // Automatically redirect to task URL
-        }
-
-        // Function to go back
-        function goBack() {
-            window.history.back();
-        }
-
-        // Initial render
-        renderTasks();
-    </script>
 </body>
 </html>
