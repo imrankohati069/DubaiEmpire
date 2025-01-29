@@ -19,6 +19,10 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            background-image: url('https://example.com/burj-al-arab-3d-image.jpg'); /* Burj Al Arab 3D Background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .header {
@@ -29,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #000000;
+            background: rgba(0, 0, 0, 0.7);
             color: #fffefe;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
@@ -49,14 +53,17 @@
             display: flex;
             align-items: center;
         }
+        .coins img {
+            margin-right: 5px;
+        }
+
         .logo {
             position: absolute;
             top: 50px;
             left: 50%;
             display: flex;
             align-items: center;
-        }.coins img {
-            margin-right: 5px;
+            transform: translateX(-50%);
         }
 
         .coming-soon-icons {
@@ -76,7 +83,7 @@
             gap: 30px;
         }
         .coming-soon {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
@@ -86,6 +93,7 @@
             flex-direction: column;
             cursor: pointer;
         }
+
         .popup {
             position: fixed;
             top: 0;
@@ -115,8 +123,9 @@
             cursor: pointer;
             color: white;
         }    
+
         .footer {
-            background: rgba(0, 0, 0, 0.993);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
             padding: 10px 0;
@@ -138,9 +147,8 @@
             align-items: center;
             gap: 5px;
         }
-        .footer button img {
-            width: 24px;
-            height: 24px;
+        .footer button i {
+            font-size: 24px;
         }
     </style>
 </head>
@@ -153,7 +161,7 @@
         <span id="coinBalance">0</span>
     </div>
 
-    <div class = 'logo'>
+    <div class="logo">
         <img src="material/images/burj.png" alt="Logo" class="logo"> <!-- Replace with your logo -->
     </div>
 
@@ -197,19 +205,19 @@
 
     <div class="footer">
         <button onclick="navigateTo('home')">
-            <img src="material/images/home.png" alt="Home">
+            <i class="fas fa-home"></i>  <!-- Home Icon -->
             Home
         </button>
         <button onclick="navigateTo('friends')">
-            <img src="material/images/Friends.png" alt="Friends">
+            <i class="fas fa-user-friends"></i>  <!-- Friends Icon -->
             Friends
         </button>
         <button onclick="navigateTo('leaderboard')">
-            <img src="material/images/laederboard.png" alt="Leaderboard">
+            <i class="fas fa-trophy"></i>  <!-- Leaderboard Icon -->
             Leaderboard
         </button>
         <button onclick="navigateTo('task')">
-            <img src="material/images/tasks.png" alt="Task">
+            <i class="fas fa-tasks"></i>  <!-- Task Icon -->
             Task
         </button>
     </div>
