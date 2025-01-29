@@ -19,7 +19,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-image: url('https://example.com/burj-al-arab-3d-image.jpg'); /* Burj Al Arab 3D Background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -34,66 +33,59 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(0, 0, 0, 0.7);
-            color: #fffefe;
+            color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
         }
+
         .user-id {
-            color: #fff;
-            font-size: 12px;
+            font-size: 14px;
             margin-left: 10px;
         }
+
         .coins {
             position: absolute;
             top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 30px;
+            font-size: 24px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        .coins img {
-            margin-right: 5px;
         }
 
-        .logo {
+        /* Burj Al Arab Image */
+        .burj-image {
+            width: 250px;
             position: absolute;
-            top: 50px;
+            top: 45%;
             left: 50%;
-            display: flex;
-            align-items: center;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
         }
 
-        .coming-soon-icons {
-            position: fixed;
-            top: 80px;
-            left: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
+        /* Sidebar Icons */
+        .coming-soon-icons,
         .coming-soon-icons-right {
             position: fixed;
-            top: 80px;
-            right: 10px;
+            top: 100px;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
+        }
+        .coming-soon-icons {
+            left: 10px;
+        }
+        .coming-soon-icons-right {
+            right: 10px;
         }
         .coming-soon {
             background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            text-align: center;
             cursor: pointer;
         }
 
+        /* Popup */
         .popup {
             position: fixed;
             top: 0;
@@ -101,9 +93,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
             display: none;
             justify-content: center;
             align-items: center;
@@ -124,6 +113,7 @@
             color: white;
         }    
 
+        /* Footer */
         .footer {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
@@ -135,20 +125,27 @@
             display: flex;
             justify-content: space-around;
         }
-        .footer button {
-            background: none;
-            color: white;
+
+        .footer .nav-item {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-            font-size: 12px;
-            cursor: pointer;
+            text-align: center;
+            width: 80px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
         }
-        .footer button i {
-            font-size: 24px;
+        .footer i {
+            font-size: 18px;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -161,32 +158,18 @@
         <span id="coinBalance">0</span>
     </div>
 
-    <div class="logo">
-        <img src="material/images/burj.png" alt="Logo" class="logo"> <!-- Replace with your logo -->
-    </div>
+    <img src="material/images/burj.png" alt="Burj Al Arab" class="burj-image">
 
     <div class="coming-soon-icons">
-        <div class="coming-soon" onclick="showComingSoonPopup()"> 
-            <div>BINANCE</div>
-        </div>
-        <div class="coming-soon" onclick="showComingSoonPopup()">   
-            <div>BITGET</div>
-        </div>
-        <div class="coming-soon" onclick="showComingSoonPopup()">   
-            <div>GATE.IO</div>
-        </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()"> BINANCE </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()"> BITGET </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()"> GATE.IO </div>
     </div>
 
     <div class="coming-soon-icons-right">
-        <div class="coming-soon" onclick="claimDailyReward()">
-            <div>Daily Reward</div>
-        </div>
-        <div class="coming-soon" onclick="showComingSoonPopup()">
-            <div>AIRDROP</div>
-        </div>
-        <div class="coming-soon" onclick="showComingSoonPopup()">
-            <div>WALLET</div>
-        </div>
+        <div class="coming-soon" onclick="claimDailyReward()"> Daily Reward </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()"> AIRDROP </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()"> WALLET </div>
     </div>
 
     <div id="comingSoonPopup" class="popup">
@@ -204,35 +187,34 @@
     </div>
 
     <div class="footer">
-        <button onclick="navigateTo('home')">
-            <i class="fas fa-home"></i>  <!-- Home Icon -->
-            Home
-        </button>
-        <button onclick="navigateTo('friends')">
-            <i class="fas fa-user-friends"></i>  <!-- Friends Icon -->
-            Friends
-        </button>
-        <button onclick="navigateTo('leaderboard')">
-            <i class="fas fa-trophy"></i>  <!-- Leaderboard Icon -->
-            Leaderboard
-        </button>
-        <button onclick="navigateTo('task')">
-            <i class="fas fa-tasks"></i>  <!-- Task Icon -->
-            Task
-        </button>
+        <div class="nav-item">
+            <a href="home.html">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="invite-friends.html">
+                <i class="fas fa-user-friends"></i> Friends
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="leaderboard.html">
+                <i class="fas fa-trophy"></i> Leaderboard
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="task.html">
+                <i class="fas fa-tasks"></i> Task
+            </a>
+        </div>
     </div>
 
     <script>
         let coinBalance = parseInt(localStorage.getItem("coinBalance")) || 0;
-        let userName = localStorage.getItem("userName") || "John Doe";  // User's name
         let lastClaimTime = parseInt(localStorage.getItem("lastClaimTime")) || 0;
 
         function updateBalance() {
             document.getElementById("coinBalance").innerText = coinBalance;
-        }
-
-        function updateUserName() {
-            document.getElementById("userName").innerText = userName;
         }
 
         function claimDailyReward() {
@@ -243,11 +225,10 @@
                 localStorage.setItem("lastClaimTime", currentTime);
                 updateBalance();
                 document.getElementById("rewardMessage").innerText = "100 Coins Collected!";
-                document.getElementById("dailyRewardPopup").style.display = "flex";
             } else {
                 document.getElementById("rewardMessage").innerText = "You can claim your reward again after 24 hours!";
-                document.getElementById("dailyRewardPopup").style.display = "flex";
             }
+            document.getElementById("dailyRewardPopup").style.display = "flex";
         }
 
         function showComingSoonPopup() {
@@ -260,12 +241,7 @@
             document.getElementById("dailyRewardPopup").style.display = "none";
         }
 
-        function navigateTo(page) {
-            alert("Navigating to " + page + " page");
-        }
-
         updateBalance();
-        updateUserName();
     </script>
 </body>
 </html>
