@@ -1,284 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Page</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #0c0c0c, #000000);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    .header {
-      background: #000000;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .header button {
-      background:rgba(5, 5, 5, 0.993);
-      color: #fdfdf7;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-    .tasks {
-      flex: 1;
-      overflow-y: auto;
-      padding: 15px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    .task-card {
-      background:#000000;
-      color: #fffefe;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .task-card h2 {
-      margin: 0 0 10px;
-      font-size: 16px;
-    }
-    .task-card p {
-      font-size: 12px;
-      margin: 0 0 10px;
-    }
-    .task-card .icon img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
-    .task-card button {
-      margin-top: 15px;
-      background: rgba(17, 17, 17, 0.993);
-      color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .task-card button:hover {
-      background: #f1e100;
-    }
-    .footer {
-      background: rgba(0, 0, 0, 0.993);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px 0;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-    }
-    .footer button {
-      background: none;
-      color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-    .footer button img {
-      width: 24px;
-      height: 24px;
-    }
-    .reward {
-      font-size: 14px;
-      color: #f7f7f7;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Empire</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000000;
+            color: #fffefe;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+        }
+        .user-id {
+            color: #fff;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .coins {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            display: flex;
+            align-items: center;
+        }.coins img {
+            margin-right: 5px;
+        }
+
+        .coming-soon-icons {
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .coming-soon-icons-right {
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .coming-soon {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup div {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+        }
+        .popup button {
+            margin-top: 10px;
+            background: #f0a500;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }    
+        .footer {
+            background: rgba(0, 0, 0, 0.993);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        .footer button {
+            background: none;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .footer button img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="header">
-    <button onclick="goBack()">Back</button>
-  </div>
-
-  <div class="tasks">
-    <div class="task-card" id="youtube-task">
-      <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-      <h2>YouTube Channel</h2>
-      <div class="reward">Reward: 50 Coins</div>
-      <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-      <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-      <button id="complete-button" style="display: none;" disabled>Complete</button>
+    <div class="header">
+        <div class="user-id">User: <span id="userName">John Doe</span></div>
+    </div>
+    
+    <div class="coins">  
+        <span id="coinBalance">0</span>
     </div>
 
-        <div class="task-card" id="youtube-task">
-          <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-          <h2>YouTube Channel</h2>
-          <div class="reward">Reward: 50 Coins</div>
-          <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-          <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-          <button id="complete-button" style="display: none;" disabled>Complete</button>
+    <div class = 'logo'>
+        <img src="material/images/burj.png" alt="Logo" class="logo"> <!-- Replace with your logo -->
+    </div>
+
+    <div class="coming-soon-icons">
+        <div class="coming-soon" onclick="showComingSoonPopup()"> 
+            <div>BINANCE</div>
         </div>
-        <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div> 
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div> 
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div> 
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div>  
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div>  
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div>  
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div>  
-          <div class="task-card" id="youtube-task">
-            <div class="icon"><img src="material/images/you.gif" alt="YouTube Icon"></div>
-            <h2>YouTube Channel</h2>
-            <div class="reward">Reward: 50 Coins</div>
-            <button onclick="startTask('youtube')" id="start-button" style="margin-top: 20px;">Start</button>
-            <button onclick="claimReward('youtube')" id="claim-button" style="display: none;">Claim</button>
-            <button id="complete-button" style="display: none;" disabled>Complete</button>
-          </div>  
+        <div class="coming-soon" onclick="showComingSoonPopup()">   
+            <div>BITGET</div>
+        </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()">   
+            <div>GATE.IO</div>
+        </div>
     </div>
 
-  <div class="footer">
-    <button onclick="navigateTo('home')">
-      <img src="home-icon.png" alt="Home">
-      Home
-    </button>
-    <button onclick="navigateTo('friends')">
-      <img src="friends-icon.png" alt="Friends">
-      Friends
-    </button>
-    <button onclick="navigateTo('leaderboard')">
-      <img src="material/images/fa.png" alt="Leaderboard">
-      Leaderboard
-    </button>
-    <button onclick="navigateTo('task')">
-      <img src="task-icon.png" alt="Task">
-      Task
-    </button>
-  </div>
+    <div class="coming-soon-icons-right">
+        <div class="coming-soon" onclick="claimDailyReward()">
+            <div>Daily Reward</div>
+        </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()">
+            <div>AIRDROP</div>
+        </div>
+        <div class="coming-soon" onclick="showComingSoonPopup()">
+            <div>WALLET</div>
+        </div>
+    </div>
 
-  <script>
-    let rewards = 0;
+    <div id="comingSoonPopup" class="popup">
+        <div>
+            <p>Coming Soon</p>
+            <button onclick="closeComingSoonPopup()">Close</button>
+        </div>
+    </div>
 
-    function goBack() {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        alert('No previous page found!');
-      }
-    }
+    <div id="dailyRewardPopup" class="popup">
+        <div>
+            <p id="rewardMessage"></p>
+            <button onclick="closeDailyRewardPopup()">Close</button>
+        </div>
+    </div>
 
-    function navigateTo(section) {
-      switch (section) {
-        case 'home':
-          alert('Navigating to Home');
-          break;
-        case 'friends':
-          alert('Navigating to Friends');
-          break;
-        case 'leaderboard':
-          alert('Navigating to Leaderboard');
-          break;
-        case 'task':
-          alert('Navigating to Task');
-          break;
-        default:
-          alert('Invalid Section');
-      }
-    }
+    <div class="footer">
+        <button onclick="navigateTo('home')">
+            <img src="material/images/home.png" alt="Home">
+            Home
+        </button>
+        <button onclick="navigateTo('friends')">
+            <img src="material/images/Friends.png" alt="Friends">
+            Friends
+        </button>
+        <button onclick="navigateTo('leaderboard')">
+            <img src="material/images/laederboard.png" alt="Leaderboard">
+            Leaderboard
+        </button>
+        <button onclick="navigateTo('task')">
+            <img src="material/images/tasks.png" alt="Task">
+            Task
+        </button>
+    </div>
 
-    function startTask(task) {
-      if (task === 'youtube') {
-        window.open('https://www.youtube.com', '_blank');
-        document.getElementById('start-button').style.display = 'none';
-        setTimeout(() => {
-          document.getElementById('claim-button').style.display = 'inline-block';
-        }, 10000); // Show claim button after 10 seconds
-      }
-    }
+    <script>
+        let coinBalance = parseInt(localStorage.getItem("coinBalance")) || 0;
+        let userName = localStorage.getItem("userName") || "John Doe";  // User's name
+        let lastClaimTime = parseInt(localStorage.getItem("lastClaimTime")) || 0;
 
-    function claimReward(task) {
-      if (task === 'youtube') {
-        rewards += 50;
-        document.getElementById('claim-button').style.display = 'none';
-        const completeButton = document.getElementById('complete-button');
-        completeButton.style.display = 'inline-block';
-        completeButton.disabled = false;
-      }
-    }
-  </script>
+        function updateBalance() {
+            document.getElementById("coinBalance").innerText = coinBalance;
+        }
 
+        function updateUserName() {
+            document.getElementById("userName").innerText = userName;
+        }
+
+        function claimDailyReward() {
+            let currentTime = Date.now();
+            if (currentTime - lastClaimTime >= 86400000) {
+                coinBalance += 100;
+                localStorage.setItem("coinBalance", coinBalance);
+                localStorage.setItem("lastClaimTime", currentTime);
+                updateBalance();
+                document.getElementById("rewardMessage").innerText = "100 Coins Collected!";
+                document.getElementById("dailyRewardPopup").style.display = "flex";
+            } else {
+                document.getElementById("rewardMessage").innerText = "You can claim your reward again after 24 hours!";
+                document.getElementById("dailyRewardPopup").style.display = "flex";
+            }
+        }
+
+        function showComingSoonPopup() {
+            document.getElementById("comingSoonPopup").style.display = "flex";
+        }
+        function closeComingSoonPopup() {
+            document.getElementById("comingSoonPopup").style.display = "none";
+        }
+        function closeDailyRewardPopup() {
+            document.getElementById("dailyRewardPopup").style.display = "none";
+        }
+
+        function navigateTo(page) {
+            alert("Navigating to " + page + " page");
+        }
+
+        updateBalance();
+        updateUserName();
+    </script>
 </body>
 </html>
