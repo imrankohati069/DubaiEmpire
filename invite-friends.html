@@ -168,21 +168,30 @@
         function shareReferralLink() {
             const referralUrl = "https://yourgame.com/referral";
             if (navigator.share) {
+                // Use the Share API for supported devices
                 navigator.share({
                     title: 'Join Dubai Empire!',
                     text: 'Get more rewards by joining Dubai Empire. Check it out!',
                     url: referralUrl
                 }).catch(err => console.error('Sharing failed:', err));
             } else {
-                alert('Sharing is not supported on this device.');
+                // Fallback to copying the link if sharing isn't supported
+                copyReferralLink();
             }
         }
 
         function copyReferralLink() {
             const referralUrl = "https://yourgame.com/referral";
+            // Using Clipboard API to copy the referral link
             navigator.clipboard.writeText(referralUrl)
-                .then(() => alert('Referral URL copied to clipboard!'))
-                .catch(err => console.error('Failed to copy:', err));
+                .then(() => {
+                    // Notify the user that the link has been copied
+                    alert('Referral URL copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy referral URL!');
+                });
         }
     </script>
 </body>
