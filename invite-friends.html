@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dubai Empire - Friends</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: #80e2a9;
+            background: #000;
             color: white;
             text-align: center;
             display: flex;
@@ -18,62 +18,44 @@
             justify-content: flex-start;
             height: 100vh;
         }
-
-        /* Header */
-        header {
+        
+        .header {
             width: 100%;
-            background-color: #222;
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
         }
-
-        header button {
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
+        .back-button {
+            background-color: #f0a500;
+            color: white;
             border: none;
             padding: 10px;
             cursor: pointer;
             border-radius: 5px;
         }
-
-        header button:hover {
-            background-color: #e64a19;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0 auto;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Logo */
         .logo {
-            width: 200px;
-            margin: 40px auto 20px auto;
+            width: 120px;
+            margin: 20px auto;
         }
-
-        /* Sections */
         .sections {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .invite-section, .copy-url-section {
-            background-color: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 10px;
             width: 300px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
         }
-
         button {
             background-color: #ff5722;
             color: white;
@@ -82,116 +64,74 @@
             cursor: pointer;
             border-radius: 5px;
         }
-
         button:hover {
             background-color: #e64a19;
         }
-
-        /* Footer Section */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-evenly;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid #444;
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            padding: 10px 0;
             position: fixed;
-            width: 100%;
             bottom: 0;
-        }
-
-        .bottom-nav .nav-item {
-            color: #fff;
-            font-size: 16px;
-            text-decoration: none;
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: space-around;
         }
-
-        .bottom-nav .nav-item i {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
-        .bottom-nav .nav-item:hover {
-            color: #ffcc00;
-        }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 480px) {
-            .logo {
-                width: 150px;
-            }
-            .invite-section, .copy-url-section {
-                width: 90%;
-            }
-            header button {
-                padding: 8px;
-            }
+        .nav-item {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            text-align: center;
+            width: 80px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Header with Back Button -->
-    <header>
-        <button onclick="goBack()" aria-label="Go Back">Back</button>
+    <div class="header">
+        <button class="back-button" onclick="goBack()">Back</button>
         <h1>Invite Friends & Get Rewards</h1>
-    </header>
-
-    <!-- Centered Logo -->
-    <img src="material/images/coin-logo.png" alt="Dubai Empire Logo" class="logo" title="Dubai Empire Logo">
-
-    <!-- Sections for Invite and Copy -->
+    </div>
+    <img src="material/images/coin-logo.png" alt="Dubai Empire Logo" class="logo">
     <div class="sections">
         <div class="invite-section">
-            <button class="invite-button" onclick="shareReferralLink()" aria-label="Invite Friends">Invite Friends</button>
+            <button onclick="shareReferralLink()">Invite Friends</button>
         </div>
         <div class="copy-url-section">
-            <button class="copy-url-button" onclick="copyReferralLink()" aria-label="Copy Referral URL">Copy Referral URL</button>
+            <button onclick="copyReferralLink()">Copy Referral URL</button>
         </div>
     </div>
-
-    <!-- Footer Navigation -->
-    <div class="bottom-nav">
-        <a class="nav-item" href="home.html"><i></i>Home</a>
-        <a class="nav-item" href="friends.html"><i></i>Friends</a>
-        <a class="nav-item" href="leaderboard.html"><i></i>Leaderboard</a>
-        <a class="nav-item" href="task.html"><i></i>Task</a>
+    <div class="footer">
+        <a class="nav-item" href="home.html">Home</a>
+        <a class="nav-item" href="friends.html">Friends</a>
+        <a class="nav-item" href="leaderboard.html">Leaderboard</a>
+        <a class="nav-item" href="task.html">Task</a>
     </div>
-
     <script>
         function goBack() {
             window.history.back();
         }
-
         function shareReferralLink() {
             const referralUrl = "https://yourgame.com/referral";
             if (navigator.share) {
-                // Use the Share API for supported devices
                 navigator.share({
                     title: 'Join Dubai Empire!',
                     text: 'Get more rewards by joining Dubai Empire. Check it out!',
                     url: referralUrl
                 }).catch(err => console.error('Sharing failed:', err));
             } else {
-                // Fallback to copying the link if sharing isn't supported
                 copyReferralLink();
             }
         }
-
         function copyReferralLink() {
             const referralUrl = "https://yourgame.com/referral";
-            // Using Clipboard API to copy the referral link
             navigator.clipboard.writeText(referralUrl)
-                .then(() => {
-                    // Notify the user that the link has been copied
-                    alert('Referral URL copied to clipboard!');
-                })
-                .catch(err => {
-                    console.error('Failed to copy:', err);
-                    alert('Failed to copy referral URL!');
-                });
+                .then(() => alert('Referral URL copied to clipboard!'))
+                .catch(err => console.error('Failed to copy:', err));
         }
     </script>
 </body>
