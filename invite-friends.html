@@ -124,7 +124,7 @@
                     url: referralUrl
                 }).catch(err => console.error('Sharing failed:', err));
             } else {
-                copyReferralLink();
+                window.location.href = referralUrl;
             }
         }
         function copyReferralLink() {
