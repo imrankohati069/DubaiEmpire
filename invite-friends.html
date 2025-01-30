@@ -18,7 +18,6 @@
             justify-content: flex-start;
             height: 80vh;
         }
-        
         .header {
             width: 100%;
             background: rgba(0, 0, 0, 0.7);
@@ -90,12 +89,22 @@
             text-align: center;
             width: 80px;
         }
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <button class="back-button" onclick="goBack()">Back</button>
-       
     </div>
     <img src="material/images/coin-logo.png" alt="Dubai Empire Logo" class="logo">
     <div class="sections">
@@ -112,27 +121,39 @@
         <a class="nav-item" href="leaderboard.html">Leaderboard</a>
         <a class="nav-item" href="task.html">Task</a>
     </div>
+    <div class="popup" id="popup">Link Copied!</div>
     <script>
         function goBack() {
             window.history.back();
         }
+
         function shareReferralLink() {
             const referralUrl = "https://t.me/DubaiEmpire_bot";
+
             if (navigator.share) {
                 navigator.share({
                     title: 'Join Dubai Empire!',
                     text: 'Get more rewards by joining Dubai Empire. Check it out!',
                     url: referralUrl
-                }).catch(err => console.error('Sharing failed:', err));
+                })
+                .then(() => console.log('Shared successfully'))
+                .catch(err => alert('Sharing failed! Try manually.'));
             } else {
-                window.location.href = referralUrl;
+                alert("Sharing not supported on this device. Copy the link instead!");
             }
         }
+
         function copyReferralLink() {
             const referralUrl = "https://t.me/DubaiEmpire_bot";
             navigator.clipboard.writeText(referralUrl)
-                .then(() => alert('Referral URL copied to clipboard!'))
-                .catch(err => console.error('Failed to copy:', err));
+                .then(() => showPopup())
+                .catch(err => alert('Failed to copy link. Try manually.'));
+        }
+
+        function showPopup() {
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+            setTimeout(() => { popup.style.display = "none"; }, 2000);
         }
     </script>
 </body>
