@@ -106,41 +106,38 @@
     <div class="header">
         <button class="back-button" onclick="goBack()">Back</button>
     </div>
+    
     <img src="material/images/coin-logo.png" alt="Dubai Empire Logo" class="logo">
+
     <div class="sections">
         <div class="invite-section">
-            <button onclick="shareReferralLink()">Invite Friends</button>
+            <button onclick="shareOnTelegram()">📩 Invite Friends</button>
         </div>
         <div class="copy-url-section">
-            <button onclick="copyReferralLink()">Copy Referral URL</button>
+            <button onclick="copyReferralLink()">🔗 Copy Referral URL</button>
         </div>
     </div>
+
     <div class="footer">
         <a class="nav-item" href="home.html">Home</a>
         <a class="nav-item" href="friends.html">Friends</a>
         <a class="nav-item" href="leaderboard.html">Leaderboard</a>
         <a class="nav-item" href="task.html">Task</a>
     </div>
+
     <div class="popup" id="popup">Link Copied!</div>
+
     <script>
         function goBack() {
             window.history.back();
         }
 
-        function shareReferralLink() {
+        function shareOnTelegram() {
             const referralUrl = "https://t.me/DubaiEmpire_bot";
+            const message = encodeURIComponent("🚀 Join Dubai Empire and earn rewards! 💰 " + referralUrl);
+            const telegramUrl = `https://t.me/share/url?url=${referralUrl}&text=${message}`;
 
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Join Dubai Empire!',
-                    text: 'Get more rewards by joining Dubai Empire. Check it out!',
-                    url: referralUrl
-                })
-                .then(() => console.log('Shared successfully'))
-                .catch(err => alert('Sharing failed! Try manually.'));
-            } else {
-                alert("Sharing not supported on this device. Copy the link instead!");
-            }
+            window.location.href = telegramUrl;
         }
 
         function copyReferralLink() {
