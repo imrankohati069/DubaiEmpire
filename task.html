@@ -15,27 +15,23 @@
       min-height: 100vh;
     }
     .header {
-      background: #000000;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .header button {
-      background: rgba(5, 5, 5, 0.993);
-      color: #fdfdf7;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 18px;
-    }
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+        }
+        .back-button {
+            background-color: #f0a500;
+            color: white;
+            border: none;
+            padding: 3px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     .tasks {
       flex: 1;
       overflow-y: auto;
@@ -46,31 +42,19 @@
     }
     .task-card {
       background: #000000;
-      color: #fffefe;
+      color: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
       padding: 10px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
-    .task-card h2 {
-      margin: 0 0 10px;
-      font-size: 16px;
-    }
-    .task-card p {
-      font-size: 12px;
-      margin: 0 0 10px;
-    }
-    .task-card .icon img {
+    .task-card img {
       width: 50px;
       height: 50px;
       margin-bottom: 10px;
     }
     .task-card button {
-      margin-top: 15px;
+      margin-top: 10px;
       background: rgba(17, 17, 17, 0.993);
       color: white;
       border-radius: 10px;
@@ -78,82 +62,93 @@
       padding: 10px 20px;
       font-size: 14px;
       cursor: pointer;
-      transition: background 0.3s;
     }
-    .task-card button:hover {
-      background: #f1e100;
+    .task-card button:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
-    .footer {
-      background: rgba(0, 0, 0, 0.993);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      padding: 10px 0;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-    }
-    .footer button {
-      background: none;
-      color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-    .footer button img {
-      width: 24px;
-      height: 24px;
-    }
+     /* Footer */
+     .footer {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .footer .nav-item {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            text-align: center;
+            width: 80px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer i {
+            font-size: 12px;
+            margin-top: 5px;
+        }
   </style>
 </head>
 <body>
   <div class="header">
     <button onclick="goBack()">Back</button>
   </div>
-  <div class="footer">
-    <button onclick="navigateTo('home')">
-      <img src="home-icon.png" alt="Home">
-      Home
-    </button>
-    <button onclick="navigateTo('friends')">
-      <img src="friends-icon.png" alt="Friends">
-      Friends
-    </button>
-    <button onclick="navigateTo('leaderboard')">
-        <img src="material/images/fa.png" alt="Leaderboard">
- Leaderboard
-    </button>
-    <button onclick="navigateTo('task')">
-      <img src="task-icon.png" alt="Task">
-      Task
-    </button>
-  </div>
 
   <div class="tasks" id="tasks-container">
-    <!-- Tasks will be dynamically added here -->
+    <!-- 10 Tasks will be generated here -->
   </div>
 
+  <div class="footer">
+    <div class="nav-item">
+        <a href="home.html">
+            <i class="fas fa-home"></i> Home
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="invite-friends.html">
+            <i class="fas fa-user-friends"></i> Friends
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="leaderboard.html">
+            <i class="fas fa-trophy"></i> Leaderboard
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="task.html">
+            <i class="fas fa-tasks"></i> Task
+        </a>
+    </div>
+</div>
+
   <script>
-    let rewards = 0;
+    let rewards = parseInt(localStorage.getItem('coinBalance')) || 0; 
     const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
 
     const tasks = [
-      { id: 'telegram', name: 'Join Telegram Channel', reward: 50, icon: 'material/images/tele.png', url: 'https://t.me' },
-      { id: 'youtube', name: 'Subscribe YouTube Channel', reward: 50, icon: 'material/images/you.gif', url: 'https://www.youtube.com' },
-      { id: 'instagram', name: 'Follow Instagram', reward: 40, icon: 'material/images/ista.png', url: 'https://www.instagram.com' },
-      { id: 'facebook', name: 'Like Facebook Page', reward: 30, icon: 'material/images/fa.png', url: 'https://www.facebook.com' },
-      { id: 'twitter', name: 'Follow Twitter', reward: 40, icon: 'material/images/te.png', url: 'https://twitter.com' },
-      { id: 'linkedin', name: 'Follow LinkedIn Page', reward: 30, icon: 'material/images/li.png', url: 'https://linkedin.com' },
-      { id: 'reddit', name: 'Join Reddit Community', reward: 30, icon: 'material/images/re.png', url: 'https://reddit.com' },
-      { id: 'tiktok', name: 'Follow TikTok', reward: 40, icon: 'material/images/ti.png', url: 'https://www.tiktok.com' },
-      { id: 'pinterest', name: 'Follow Pinterest', reward: 20, icon: 'material/images/pi.png', url: 'https://pinterest.com' },
-      { id: 'snapchat', name: 'Follow Snapchat', reward: 25, icon: 'material/images/sn.png', url: 'https://snapchat.com' },
+      { id: 'telegram', name: 'Join Telegram Channel', reward: 100, icon: 'material/images/tele.png', url: 'https://t.me/dubaiempirecommunity' },
+      { id: 'youtube', name: 'Subscribe YouTube Channel', reward: 100, icon:  'material/images/you.gif', url: 'https://www.youtube.com/@Dubai_Empire' },
+      { id: 'instagram', name: 'Follow Instagram', reward: 100, icon: 'material/images/ista.png', url: 'https://www.instagram.com/raastaauryaadein?utm_source=qr&igsh=MXhwMmN5OTBwb2pkZQ==' },
+      { id: 'facebook', name: 'Follow Facebook Page', reward: 100, icon: 'material/images/fa.png', url: 'https://www.facebook.com/share/19ysjzY9XQ/' },
+      { id: 'twitter', name: 'Follow X Twitter', reward: 100, icon: 'material/images/te.png', url: 'U7ON2T3WH57MMMMARVQHT5IOLB7ZDXOHFXAUEB3CQRDA66KLDUX3RXPE5E' },
+      { id: 'linkedin', name: 'Follow Facebook', reward: 100, icon: 'material/images/fa.png', url: 'https://www.facebook.com/share/1BLhrMLcQ8/' },
+      { id: 'reddit', name: 'Subscribe youtube channel', reward: 100, icon: 'material/images/you.gif', url: 'https://youtube.com/@raastaauryaadein?si=h2jRwToIMqdxhXjn' },
+      { id: 'tiktok', name: 'Subscribe youtube channel', reward: 100, icon: 'material/images/you.gif', url: 'https://www.youtube.com/@Thelegacytracker' },
+      ,
     ];
 
     function goBack() {
@@ -171,21 +166,28 @@
       startButton.style.display = 'none';
       setTimeout(() => {
         claimButton.style.display = 'inline-block';
-      }, 10000); // Show claim button after 10 seconds
+      }, 10000);
     }
 
     function claimReward(taskId) {
       const task = tasks.find(t => t.id === taskId);
       const claimButton = document.getElementById(`claim-button-${taskId}`);
-      const completeButton = document.getElementById(`complete-button-${taskId}`);
+      const taskCard = document.getElementById(`task-card-${taskId}`);
+
+      if (claimButton.disabled) return;
 
       rewards += task.reward;
-      localStorage.setItem('coinBalance', rewards); // Store updated balance in localStorage
-      localStorage.setItem('completedTasks', JSON.stringify([...completedTasks, taskId])); // Store completed task
-      document.getElementById('total-rewards').textContent = rewards;
-      claimButton.style.display = 'none';
-      completeButton.style.display = 'inline-block';
-      completeButton.disabled = false;
+      localStorage.setItem('coinBalance', rewards);
+      localStorage.setItem('completedTasks', JSON.stringify([...completedTasks, taskId]));
+
+      claimButton.disabled = true;
+      claimButton.style.opacity = "0.5";
+      claimButton.style.cursor = "not-allowed";
+
+      // Task hide ho jaye after claim
+      setTimeout(() => {
+        taskCard.style.display = 'none';
+      }, 1000);
     }
 
     function generateTasks() {
@@ -194,13 +196,13 @@
         if (!completedTasks.includes(task.id)) {
           const taskCard = document.createElement('div');
           taskCard.classList.add('task-card');
+          taskCard.id = `task-card-${task.id}`;
           taskCard.innerHTML = `
-            <div class="icon"><img src="${task.icon}" alt="${task.name} Icon"></div>
+            <img src="${task.icon}" alt="${task.name} Icon">
             <h2>${task.name}</h2>
             <div class="reward">Reward: ${task.reward} Coins</div>
             <button onclick="startTask('${task.id}')" id="start-button-${task.id}">Start</button>
             <button onclick="claimReward('${task.id}')" id="claim-button-${task.id}" style="display: none;">Claim</button>
-            <button id="complete-button-${task.id}" style="display: none;" disabled>Complete</button>
           `;
           tasksContainer.appendChild(taskCard);
         }
