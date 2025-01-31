@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             background: #000000;
-            color: rgb(194, 120, 10);
+            color: rgb(255, 255, 255);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -18,65 +18,50 @@
             height: 100vh;
         }
 
-        header {
+        .header {
             width: 100%;
-            background-color: #222;
-            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px;
+            border-radius: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Back button ko left side pe shift karne ke liye */
             align-items: center;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
         }
 
-        header button {
-            background-color: #ffffff;
-            color: black;
+        .back-button {
+            background-color: #f0a500;
+            color: white;
             border: none;
-            padding: 10px;
+            padding: 3px 6px;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 12px;
+            margin-right: 20px;
         }
 
         h1 {
             font-size: 20px;
             font-weight: bold;
             margin: 0 auto;
+            flex-grow: 1;
         }
 
-        .leaderboard {
-            width: 90%;
-            max-width: 800px;
-            margin: 20px auto;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .leaderboard-header {
-            background: #ff5722;
-            color: white;
-            padding: 10px 20px;
-            font-size: 18px;
+        /* Center Message */
+        .message {
+            font-size: 20px;
             font-weight: bold;
-            display: flex;
-            justify-content: space-around;
+            margin-top: 250px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: inline-block;
         }
-
-        .leaderboard-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 20px;
-            border-bottom: 1px solid #ddd;
-            background: #222;
-        }
-
-        .leaderboard-item:nth-child(odd) { background: #333; }
-
-        .gold { color: gold; }
-        .silver { color: silver; }
-        .bronze { color: #cd7f32; }
 
         .footer {
             background: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
+            padding: 6px 0;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -86,7 +71,7 @@
 
         .nav-item {
             background: rgba(0, 0, 0, 0.9);
-            padding: 8px;
+            padding: 6px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
             text-align: center;
@@ -103,58 +88,27 @@
     </style>
 </head>
 <body>
-<header>
-    <button onclick="goBack()">Back</button>
-    <h1>Leaderboard</h1>
-</header>
 
-<div class="leaderboard">
-    <div class="leaderboard-header">
-        <span>Rank</span>
-        <span>Name</span>
-        <span>Score</span>
-    </div>
-    <div id="leaderboard-content"></div>
-</div>
+<header class="header">
+    <button class="back-button" onclick="goBack()">Back</button>
+   </header>
 
+<!-- Message instead of leaderboard -->
+<div class="message"> Not accessible for now</div>
+
+<!-- Footer Navigation -->
 <div class="footer">
     <div class="nav-item"><a href="home.html">Home</a></div>
-    <div class="nav-item"><a href="invte-friends.html">Friends</a></div>
+    <div class="nav-item"><a href="invite-friends.html">Friends</a></div>
     <div class="nav-item"><a href="leaderboard.html">Leaderboard</a></div>
     <div class="nav-item"><a href="task.html">Task</a></div>
 </div>
 
 <script>
-    function goBack() { window.history.back(); }
-
-    const leaderboardData = [
-        { name: "Ali Khan", score: 1200 },
-        { name: "Sara Malik", score: 1100 },
-        { name: "Ahmed Raza", score: 1050 },
-        { name: "Zain Shah", score: 1000 },
-        { name: "Ayesha Tariq", score: 950 }
-    ];
-
-    const leaderboardContent = document.getElementById("leaderboard-content");
-
-    function populateLeaderboard(data) {
-        leaderboardContent.innerHTML = "";
-        data.forEach((user, index) => {
-            const rank = index + 1;
-            let medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank;
-            
-            const leaderboardItem = document.createElement("div");
-            leaderboardItem.className = "leaderboard-item";
-            leaderboardItem.innerHTML = `
-                <span>${medal}</span>
-                <span>${user.name}</span>
-                <span>${user.score}</span>
-            `;
-            leaderboardContent.appendChild(leaderboardItem);
-        });
+    function goBack() {
+        window.history.back();
     }
-
-    populateLeaderboard(leaderboardData);
 </script>
+
 </body>
 </html>
