@@ -5,20 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dubai Empire - Leaderboard</title>
     <style>
-        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #80e2a9;
-            color: white;
+            background: #000000;
+            color: rgb(194, 120, 10);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100vh;
         }
 
-        /* Header with Back Button */
         header {
-            background: #222;
-            color: white;
-            padding: 15px;
+            width: 100%;
+            background-color: #222;
+            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -26,33 +29,25 @@
 
         header button {
             background-color: #ffffff;
-            color: rgb(0, 0, 0);
+            color: black;
             border: none;
             padding: 10px;
             cursor: pointer;
             border-radius: 5px;
         }
 
-        header button:hover {
-            background-color: #e64a19;
-        }
-
         h1 {
-            margin: 0;
             font-size: 20px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            flex-grow: 1; /* Ensure header text is centered */
+            font-weight: bold;
+            margin: 0 auto;
         }
 
-        /* Leaderboard Styles */
         .leaderboard {
             width: 90%;
             max-width: 800px;
             margin: 20px auto;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .leaderboard-header {
@@ -62,87 +57,54 @@
             font-size: 18px;
             font-weight: bold;
             display: flex;
-            justify-content: space-around; /* Center items horizontally */
-            align-items: center;
+            justify-content: space-around;
         }
 
         .leaderboard-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 15px 20px;
             border-bottom: 1px solid #ddd;
             background: #222;
         }
 
-        .leaderboard-item:nth-child(odd) {
-            background: #333;
-        }
+        .leaderboard-item:nth-child(odd) { background: #333; }
 
-        .leaderboard-item .rank {
-            font-weight: bold;
-            font-size: 18px;
-        }
+        .gold { color: gold; }
+        .silver { color: silver; }
+        .bronze { color: #cd7f32; }
 
-        .leaderboard-item .name {
-            flex: 1;
-            text-align: left;
-            margin-left: 20px;
-        }
-
-        .leaderboard-item .medal {
-            font-size: 20px;
-        }
-
-        /* Medal Colors */
-        .gold {
-            color: gold;
-        }
-
-        .silver {
-            color: silver;
-        }
-
-        .bronze {
-            color: #cd7f32;
-        }
-
-        /* Footer Navigation */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-evenly;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid #444;
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
             position: fixed;
-            width: 100%;
             bottom: 0;
-        }
-
-        .bottom-nav .nav-item {
-            color: #fff;
-            font-size: 16px;
-            text-decoration: none;
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: space-around;
         }
 
-        .bottom-nav .nav-item i {
-            font-size: 20px;
-            margin-bottom: 5px;
+        .nav-item {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(216, 107, 4, 0.993);
+            text-align: center;
+            width: 80px;
         }
 
-        .bottom-nav .nav-item:hover {
-            color: #ffcc00;
+        .nav-item a {
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+            display: block;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
-
-<!-- Header with Back Button -->
 <header>
-    <button onclick="goBack()" aria-label="Go Back">Back</button>
+    <button onclick="goBack()">Back</button>
     <h1>Leaderboard</h1>
 </header>
 
@@ -150,69 +112,49 @@
     <div class="leaderboard-header">
         <span>Rank</span>
         <span>Name</span>
-        <span>Medal</span>
+        <span>Score</span>
     </div>
-    <!-- Dynamic Content -->
     <div id="leaderboard-content"></div>
 </div>
 
-<!-- Footer Navigation -->
-<div class="bottom-nav">
-    <a class="nav-item" href="home.html"><i></i>Home</a>
-    <a class="nav-item" href="friends.html"><i></i>Friends</a>
-    <a class="nav-item" href="leaderboard.html"><i></i>Leaderboard</a>
-    <a class="nav-item" href="task.html"><i></i>Task</a>
+<div class="footer">
+    <div class="nav-item"><a href="home.html">Home</a></div>
+    <div class="nav-item"><a href="friends.html">Friends</a></div>
+    <div class="nav-item"><a href="leaderboard.html">Leaderboard</a></div>
+    <div class="nav-item"><a href="task.html">Task</a></div>
 </div>
 
 <script>
-    function goBack() {
-        window.history.back();
-    }
+    function goBack() { window.history.back(); }
 
-    // Dummy Data for Top 100 Users
     const leaderboardData = [
-        { name: "John Doe", score: 1500 },
-        { name: "Alice Smith", score: 1450 },
-        { name: "Bob Johnson", score: 1400 },
-        { name: "Mary Lee", score: 1350 },
-        { name: "Tom Hanks", score: 1300 },
-        // ... Add up to 100 users for demonstration
+        { name: "Ali Khan", score: 1200 },
+        { name: "Sara Malik", score: 1100 },
+        { name: "Ahmed Raza", score: 1050 },
+        { name: "Zain Shah", score: 1000 },
+        { name: "Ayesha Tariq", score: 950 }
     ];
-
-    // Populate Dummy Data for 100 Entries
-    for (let i = 6; i <= 100; i++) {
-        leaderboardData.push({ name: `User ${i}`, score: 1000 - i });
-    }
 
     const leaderboardContent = document.getElementById("leaderboard-content");
 
-    // Function to Populate Leaderboard
     function populateLeaderboard(data) {
+        leaderboardContent.innerHTML = "";
         data.forEach((user, index) => {
-            const rank = index + 1; // Rank starts from 1
+            const rank = index + 1;
+            let medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank;
+            
             const leaderboardItem = document.createElement("div");
             leaderboardItem.className = "leaderboard-item";
-
-            // Medal or Rank Number
-            let medal = "";
-            if (rank === 1) medal = `<span class="medal gold">🥇</span>`;
-            else if (rank === 2) medal = `<span class="medal silver">🥈</span>`;
-            else if (rank === 3) medal = `<span class="medal bronze">🥉</span>`;
-            else medal = `<span>${rank}</span>`;
-
             leaderboardItem.innerHTML = `
-                <span class="rank">${medal}</span>
-                <span class="name">${user.name}</span>
+                <span>${medal}</span>
+                <span>${user.name}</span>
                 <span>${user.score}</span>
             `;
-
             leaderboardContent.appendChild(leaderboardItem);
         });
     }
 
-    // Populate the leaderboard with dummy data
     populateLeaderboard(leaderboardData);
 </script>
-
 </body>
 </html>
