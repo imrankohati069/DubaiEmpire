@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dubai Empire</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
     <style>
         /* Global Styles */
         body {
@@ -151,6 +154,7 @@
 </head>
 <body>
     <div class="header">
+         <div id="username" class="user-id">Loading...</div>
     </div>
     
     <div class="coins">  
@@ -240,7 +244,79 @@
             document.getElementById("dailyRewardPopup").style.display = "none";
         }
 
+         document.addEventListener("DOMContentLoaded", function () {
+            // Firebase Configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBW4V6KBybSXqvyO0qeMGp_V6KWD-GYkj0",
+  authDomain: "dubaiempirebot.firebaseapp.com",
+  databaseURL: "https://dubaiempirebot-default-rtdb.firebaseio.com",
+  projectId: "dubaiempirebot",
+  storageBucket: "dubaiempirebot.firebasestorage.app",
+  messagingSenderId: "371083405547",
+  appId: "1:371083405547:web:ce2f0a4ca945eaf37cb6ae",
+  measurementId: "G-LLDYZZX0K0"
+            };
+
+            // Initialize Firebase
+            const app = firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+            // Telegram WebApp API
+            let tg = window.Telegram.WebApp;
+            let user = tg.initDataUnsafe?.user;
+
+            function updateUserInfo() {
+                if (user) {
+                    document.getElementById("username").innerText = user.first_name + " " + (user.last_name || '');
+                    saveUserData(user);
+                    fetchUserCoins(user.id);
+                } else {
+                    console.log("User data not available. Check Telegram settings.");
+                }
+            }
+
+            async function saveUserData(user) {
+                try {
+                    const userRef = db.collection("users").doc(user.id.toString());
+                    const docSnap = await userRef.get();
+                    if (!docSnap.exists) {
+                        await userRef.set({
+                            id: user.id,
+                            first_name: user.first_name,
+                            last_name: user.last_name || "",
+                            username: user.username || "",
+                            coins: 0,
+                            joinedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        console.log("New user added to Firestore.");
+                    } else {
+                        console.log("User already exists in Firestore.");
+                    }
+                } catch (error) {
+                    console.error("Error saving user data:", error);
+                }
+            }
+
+            async function fetchUserCoins(userId) {
+                try {
+                    const docRef = db.collection("users").doc(userId.toString());
+                    const docSnap = await docRef.get();
+                    if (docSnap.exists) {
+                        let coins = docSnap.data().coins;
+                        document.getElementById("coinBalance").innerText = coins;
+                    } else {
+                        console.log("User data not found in Firebase.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching coins:", error);
+                }
+            }
+
+            updateUserInfo();
+        });
+
         updateBalance();
+
     </script>
 </body>
 </html>
